@@ -11,9 +11,11 @@
 module default {
 
     # scalar types
-    scalar type PoliceRank extending enum<Protected, Cadet, PC, SPC, SGT, SSGT, PI, IP, SIP, CIP, SP, SSP, CSP, ACP, SACP, DCP, CP>;
+    scalar type PoliceRank extending enum<Protected, Cadet, PC, SPC, SGT, SSGT, PI, IP, SIP, CIP,
+                                          SP, SSP, CSP, ACP, SACP, DCP, CP>;
     scalar type GangsterRank extending enum<Nobody, Leader, Boss>;
-    scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>;
+    scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday,
+                                         Saturday, Sunday>;
 
     scalar type FuzzyYear extending int64;
     scalar type FuzzyMonth extending int64 {
@@ -160,9 +162,11 @@ module default {
     global current_user_id: uuid;
 
     # scalar types
-    scalar type PoliceRank extending enum<Protected, Cadet, PC, SPC, SGT, SSGT, PI, IP, SIP, CIP, SP, SSP, CSP, ACP, SACP, DCP, CP>;
+    scalar type PoliceRank extending enum<Protected, Cadet, PC, SPC, SGT, SSGT, PI, IP, SIP, CIP,
+                                          SP, SSP, CSP, ACP, SACP, DCP, CP>;
     scalar type GangsterRank extending enum<Nobody, Leader, Boss>;
-    scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>;
+    scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday,
+                                         Saturday, Sunday>;
 
     scalar type FuzzyYear extending int64;
     scalar type FuzzyMonth extending int64 {
