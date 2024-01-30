@@ -1,13 +1,13 @@
 # Project information
 site_name: 看無間道學EdgeDB
-site_url: https://jrycw.github.io/_edgedb-ia
+site_url: https://jrycw.github.io/edgedb-ia
 site_author: Jerry Wu
 site_description: >-
   EdgeDB
 
 # Repository
-repo_name: jrycw/_edgedb-ia
-repo_url: https://github.com/jrycw/_edgedb-ia
+repo_name: jrycw/edgedb-ia
+repo_url: https://github.com/jrycw/edgedb-ia
 
 
 nav:
@@ -31,8 +31,7 @@ nav:
 
 # Theme
 theme:
-  
-  
+
   name: material
   
   icon:
