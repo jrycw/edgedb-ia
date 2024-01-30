@@ -16,11 +16,21 @@ module default {
     scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>;
 
     scalar type FuzzyYear extending int64;
-    scalar type FuzzyMonth extending int64 {constraint expression on (__subject__ >=1 and __subject__ <=12)}
-    scalar type FuzzyDay extending int64 {constraint expression on (__subject__ >=1 and __subject__ <=31)}
-    scalar type FuzzyHour extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=23)}
-    scalar type FuzzyMinute extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=59)}
-    scalar type FuzzySecond extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=59)}
+    scalar type FuzzyMonth extending int64 {
+                constraint expression on (__subject__ >=1 and __subject__ <=12)
+    }
+    scalar type FuzzyDay extending int64 {
+                constraint expression on (__subject__ >=1 and __subject__ <=31)
+    }
+    scalar type FuzzyHour extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=23)
+    }
+    scalar type FuzzyMinute extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=59)
+    }
+    scalar type FuzzySecond extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=59)
+    }
 
     scalar type SceneNumber extending sequence;
 
@@ -155,11 +165,21 @@ module default {
     scalar type DayOfWeek extending enum<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>;
 
     scalar type FuzzyYear extending int64;
-    scalar type FuzzyMonth extending int64 {constraint expression on (__subject__ >=1 and __subject__ <=12)}
-    scalar type FuzzyDay extending int64 {constraint expression on (__subject__ >=1 and __subject__ <=31)}
-    scalar type FuzzyHour extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=23)}
-    scalar type FuzzyMinute extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=59)}
-    scalar type FuzzySecond extending int64 {constraint expression on (__subject__ >=0 and __subject__ <=59)}
+    scalar type FuzzyMonth extending int64 {
+                constraint expression on (__subject__ >=1 and __subject__ <=12)
+    }
+    scalar type FuzzyDay extending int64 {
+                constraint expression on (__subject__ >=1 and __subject__ <=31)
+    }
+    scalar type FuzzyHour extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=23)
+    }
+    scalar type FuzzyMinute extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=59)
+    }
+    scalar type FuzzySecond extending int64 {
+                constraint expression on (__subject__ >=0 and __subject__ <=59)
+    }
 
     scalar type SceneNumber extending sequence;
     scalar type TeamTreatNumber extending sequence; 
@@ -424,7 +444,8 @@ module default {
                     ))
     );
 
-    alias morse_code_of_undercover:= str_replace("..- -. -.. . .-. -.-. --- ...- . .-.", "-", "_"); # undercover
+    # undercover
+    alias morse_code_of_undercover:= str_replace("..- -. -.. . .-. -.-. --- ...- . .-.", "-", "_");
 
     # functions
     function is_hi_fi_store_open(dow: DayOfWeek, visit_hour: int64) -> bool
