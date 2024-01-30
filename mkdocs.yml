@@ -1,0 +1,100 @@
+# Project information
+site_name: 看無間道學EdgeDB
+site_url: https://jrycw.github.io/_edgedb-ia
+site_author: Jerry Wu
+site_description: >-
+  EdgeDB
+
+# Repository
+repo_name: jrycw/_edgedb-ia
+repo_url: https://github.com/jrycw/_edgedb-ia
+
+
+nav:
+  - 簡介: index.md
+  - 初始schema:
+    - initial_schema/person/person.md
+    - initial_schema/time/time.md
+    - initial_schema/place/place.md
+    - initial_schema/entity/entity.md
+  - 場景:
+    - scenes/scene01/scene01.md
+    - scenes/scene02/scene02.md
+    - scenes/scene03/scene03.md
+    - scenes/scene04/scene04.md
+    - scenes/scene05/scene05.md
+    - scenes/scene06/scene06.md
+    - scenes/scene07/scene07.md
+    - scenes/scene08/scene08.md
+    - scenes/scene09/scene09.md
+    - scenes/scene10/scene10.md
+
+# Theme
+theme:
+  
+  
+  name: material
+  
+  icon:
+    repo: fontawesome/brands/github
+
+  language: en
+
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - navigation.tracking
+    - navigation.instant
+    - navigation.expand
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.footer
+    - content.tabs.link
+
+  palette: 
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+# extra_css:
+#   - _build/css/extra.css
+
+# Preview controls
+strict: true
+
+# Formatting options
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: ['.','docs/']
+      check_paths: true
+      dedent_subsections: true
+  - footnotes
+  - md_in_html
+
+plugins:
+  - search:
+      lang: en
+  - tags
+  - glightbox
