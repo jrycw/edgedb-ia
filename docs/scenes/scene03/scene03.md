@@ -151,7 +151,7 @@ tags:
 我們可以使用[`splats`](https://www.edgedb.com/docs/edgeql/select#splats)的語法，來看看兩次`insert`是否成功。
 ??? question "`select type {*}` vs `select type {**}`"
     * `select type {*}`可以列出一個`type`的所有`property`。
-    * `select type {**}`除了可以列出`select type{*}`所列出的，還可以列出`type`所有的`link type`（但只會列出一層深度，不會遞迴全部列出）。
+    * `select type {**}`除了可以列出`select type {*}`所列出的，還可以列出`type`所有的`link type`（但只會列出一層深度，不會遞迴全部列出）。
 
 ``` sql title="scenes/scene03/query.edgeql"
 --8<-- "scenes/scene03/_internal/query.edgeql:select_criminalrecord_2stars_1"

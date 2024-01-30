@@ -148,7 +148,7 @@ reset global current_user_id;
 --8<-- "scenes/scene09/_internal/schema.esdl:function_validate_password"
 ```
 
-至此。我們滿足了第三個需求。
+至此，我們滿足了第三個需求。
 ??? danger "make end migration here（`scenes/scene09/schema.esdl`）"
     ``` sql
     did you create extension 'pgcrypto'? [y,n,l,c,b,s,q,?]

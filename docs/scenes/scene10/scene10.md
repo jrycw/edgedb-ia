@@ -11,7 +11,7 @@ tags:
 
     === "start"
         ``` sql title="scenes/scene09/schema.esdl"
-        --8<-- "scenes/scene08/schema.esdl"
+        --8<-- "scenes/scene09/schema.esdl"
         ```
 
     === "end migration" 
@@ -144,7 +144,7 @@ tags:
 ``` sql title="scenes/scene10/query.edgeql"
 --8<-- "scenes/scene10/_internal/query.edgeql:select_dcp_2"
 ```
-但是除了這種**經典**的寫法外，EdgeDB還提供了這種寫法：
+但是除了這種**經典**的寫法外，EdgeDB還提供了以下寫法：
 ``` sql title="scenes/scene10/query.edgeql"
 --8<-- "scenes/scene10/_internal/query.edgeql:select_dcp_3"
 ```
