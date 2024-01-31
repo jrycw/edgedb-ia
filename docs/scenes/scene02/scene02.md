@@ -1,6 +1,7 @@
 ---
 tags:
   - nested inserts
+  - overloaded
 ---
 
 # 02 - 我想跟他換
@@ -33,13 +34,13 @@ tags:
 
 ## EdgeQL query
 ### `insert`陳永仁及其少年時期演員余文樂
-練習使用`nested inserts`同時`insert`陳永仁及演員余文樂。
+練習使用`nested inserts`來同時`insert`陳永仁及演員余文樂。
 ``` sql title="scenes/scene02/query.edgeql"
 --8<-- "scenes/scene02/_internal/query.edgeql:insert_chen"
 ```
 
 ### `insert`黃志誠及其演員黃秋生
-練習使用`nested inserts`同時`insert`黃志誠及演員黃秋生。
+練習使用`nested inserts`來同時`insert`黃志誠及演員黃秋生。
 ``` sql title="scenes/scene02/query.edgeql"
 --8<-- "scenes/scene02/_internal/query.edgeql:insert_wong"
 ```

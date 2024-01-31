@@ -41,9 +41,9 @@ tags:
 ```
 
 ### `insert`韓琛及其演員曾志偉
-韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines`的`array<str>`中。
+韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines` `property`中。
 
-此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
+此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`Actor object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
 ``` sql title="scenes/scene01/query.edgeql"
 --8<-- "scenes/scene01/_internal/query.edgeql:insert_hon"
 ```
@@ -54,7 +54,7 @@ tags:
 ```
 
 ### 建立`alias`
-由於每次都要使用`(select ... filter ... .xxx=ooo)`的語法來選擇`object`頗為麻煩，針對常用到的`object`，可以直接在`schema`中定義`alias`，方便取用。我們這邊定義了一個`hon`（韓琛）、`lau`（劉建明）及`year_1992`（1992年）的`alias`。
+由於每次都要使用`(select ... filter ... .xxx=ooo)`的語法來選擇`object`頗為麻煩，針對常用到的`object`，可以直接在schema中定義`alias`，方便取用。我們這邊定義了一個`hon`（韓琛）、`lau`（劉建明）及`year_1992`（1992年）的`alias`。
 ``` sql title="scenes/scene01/schema.esdl"
 --8<-- "scenes/scene01/_internal/schema.esdl:alias_hon"
 --8<-- "scenes/scene01/_internal/schema.esdl:alias_lau"
@@ -65,7 +65,7 @@ tags:
 !!! warning "空`set`需要型別"
     空`set`前別忘了加上型別來`casting`。
 ??? example "alias year_1992的另一種寫法"
-    也可以使用`fuzzy_fmt`這個`computed property`來做為filter的條件。
+    也可以使用`fuzzy_fmt`這個`computed property`來做為`filter`的條件。
     ``` sql
     alias year_1992:= assert_exists(assert_single((select FuzzyTime filter .fuzzy_fmt="1992/MM/DD_HH24:MI:SS_ID")));
     ```
@@ -81,7 +81,7 @@ tags:
 --8<-- "scenes/scene01/_internal/schema.esdl:test_scene01_alias"
 ```
 !!! warning "`function`的語法"
-    寫習慣`Python`的朋友，常常會在定義`function`時，在`()`後加上`:`。
+    習慣寫Python的朋友，常常會在定義`function`時，在`()`後加上`:`。
 `test_alias`中會包含多個場景的sub-test（如`test_scene01_alias`），當每一個場景的`sub-test`都返回`true`時，[`all`](https://www.edgedb.com/docs/stdlib/set#function::std::all)會返回`true`，否則會報錯。而我們利用[`exists`](https://www.edgedb.com/docs/stdlib/set#operator::exists)檢查各場景中的`alias`是否存在，如果全部都存在的話，`all`會返回`true`，否則會報錯。
 
 !!! failure "報錯訊息"
@@ -89,7 +89,7 @@ tags:
     edgedb error: CardinalityViolationError: assert_exists violation: expression returned an empty set
     ```
 
-這麼一來當我們在操作資料庫時，可以隨時透過`test_alias`來確認每一個`alias`，是否都如我們預期地返回了剛好一個`object`。
+這麼一來當我們在操作資料庫時，可以隨時透過`test_alias`來確認每一個`alias`，是否都如預期地返回了剛好一個`object`。
 
 ??? danger "make end migration here（`scenes/scene01/schema.esdl`）"
     ``` sql
@@ -125,7 +125,7 @@ tags:
     ```
 
 ## 無間假設
-理論上，我們應該處理`建明`由`Gangster object`轉變到`GangsterSpy object`的過程，但這對於`scene01`來說，可能太過複雜，所以在此處直接`insert` `建明`為`GangsterSpy object`。同理，我們將於`scene02`直接`insert` `永仁`為`PoliceSpy object`，而不處理其由`Police object`轉變到`PoliceSpy object`的過程。
+理論上，我們應該處理建明由`Gangster object`轉變到`GangsterSpy object`的過程，但這對於`scene01`來說，可能太過複雜，所以在此處直接`insert`建明為`GangsterSpy object`。同理，我們將於`scene02`直接`insert`永仁為`PoliceSpy object`，而不處理其由`Police object`轉變到`PoliceSpy object`的過程。
 
 ## 無間吹水
 佛堂前六個骨灰罈暗指當年韓琛死於屯門的六個兄弟。他藉祭拜為由，於一眾小弟面前展現其「仁義之風」。

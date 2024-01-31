@@ -3,7 +3,7 @@ site_name: 看無間道學EdgeDB
 site_url: https://jrycw.github.io/edgedb-ia
 site_author: Jerry Wu
 site_description: >-
-  EdgeDB
+  EdgeDB learning material in Traditional Chinese.
 
 # Repository
 repo_name: jrycw/edgedb-ia

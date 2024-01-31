@@ -71,12 +71,12 @@ tags:
 * 13:00~14:00及19:00~20:00為休息時間。
 
 !!! tip "`range` vs `multiranges`"
-    判斷某個數字是否在單一區間內，可以使用[`range()`](https://www.edgedb.com/docs/stdlib/range)。但如果是有多個區間的話，則可以搭配[`multirange()`](https://www.edgedb.com/docs/stdlib/range#multiranges)來處理。
+    判斷某個數字是否在單一區間內，可以使用[`range()`](https://www.edgedb.com/docs/stdlib/range)。但如果有多個區間的話，則可以搭配[`multirange()`](https://www.edgedb.com/docs/stdlib/range#multiranges)來處理。
 
 
 `is_hi_fi_store_open` `function`接收兩個變數，一個是`dow`（`DayOfWeek`型態）代表星期幾造訪，另一個是`visit_hour`（`int64`型態）代表幾點造訪，回傳值則為`bool`型態。
 
-我們將營業時間拆成三個`11~13`、`14~19`及`20~22`三個`range`並包成一個`array`後，傳給一個`multirange`，並在`with`區塊中將其命名為`open_hours`。
+我們將營業時間拆成`11~13`、`14~19`及`20~22`三個`range`並包成一個`array`後，傳給一個`multirange`，並在`with`區塊中將其命名為`open_hours`。
 
 接著判斷`dow`是否不是星期三，且`visit_hour`是否在`open_hours`區間內（使用[`contains`](https://www.edgedb.com/docs/stdlib/generic#function::std::contains)）。如果是的話，代表該時間為店家營業時間，回傳`true`；否則即為休息時間，回傳`false`。
 

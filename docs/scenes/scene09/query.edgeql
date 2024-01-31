@@ -1,5 +1,7 @@
 set global current_user_id:= (select Police filter .police_rank=PoliceRank.SP limit 1).id;
-select test_alias();  # {true}
+
+select test_alias();
+
 reset global current_user_id;
 
 select validate_password(morse_code_of_undercover); # {true}

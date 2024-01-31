@@ -28,7 +28,7 @@ tags:
   <figcaption><a href="https://www.imdb.com/title/tt0338564/mediaindex">此劇照引用自IMDb-無間道</a></figcaption>
 </figure>
 
- 建明得知黃sir將與警方臥底於大廈見面，通知韓琛。韓琛一面派手下到大廈，一面進行毒品交易。黃sir為掩護永仁離開，被韓琛手下丟下樓，寧願殉職而不發一言。黃sir死後，建明聯手永仁於停車場擊斃韓琛，最終兩人於警察局見面。當建明正幫永仁處理臥底檔案時，永仁發現其親手所寫帶有「標」字的信封竟然在建明桌上，醒悟原來建明就是韓琛派至警隊的臥底，立即悄然離開。
+ 建明得知黃sir將與警方臥底於大廈見面，通知韓琛。韓琛一面派手下到大廈，一面進行毒品交易。黃sir為掩護永仁離開，被韓琛手下丟下大廈，寧願殉職而不發一言。黃sir死後，建明聯手永仁於停車場擊斃韓琛，最終兩人於警察局見面。當建明正幫永仁處理臥底檔案時，永仁發現其親手所寫帶有「標」字的信封竟然在建明桌上，頓時醒悟原來建明就是韓琛派至警隊的臥底，立即悄然離開。
 
 ## 警隊資安升級計畫
 自從黃sir殉職之後，警隊高層了解在趕快找出韓琛臥底的同時，也需要保護好自己派出的臥底，於是決定全面重新檢查一遍資料庫的存取權限。
@@ -41,7 +41,7 @@ tags:
     * 只有副處長級別以上（`DCP`）可以`insert`、`update`及`delete`。
     * 只有警司級別以上（`SP`）可以`select`。
 * 新增一個`PoliceSpyFile`方便各部門協同操作，只有警司級別以上（`SP`）可以執行全部操作。
-* 於非內網登入系統時，不提供`REPL`操作。關於臥底資料僅提供一個`list_police_spy_names`的endpoint，且只有當操作者驗證為警司級別以上（`SP`）且密碼正確的情況下，才能得到全部警察臥底的名字。
+* 於非內網登入系統時，不提供`REPL`操作。關於臥底資料僅提供一個`list_police_spy_names`的endpoint，且只有當操作者驗證為警司級別以上（`SP`）且密碼正確的情況下，才能取得警隊全部臥底的名字。
 
 ## EdgeQL query
 ### 建立 `global` `current_user_id`
@@ -119,7 +119,7 @@ reset global current_user_id;
     如果您的app有驗證需求的話，可以試試EdgeDB4.0推出的[`Auth extension`](https://www.edgedb.com/docs/guides/auth/index)。
 
 #### 建立`alias` `morse_code_of_undercover`
-劇中永仁臥底檔案的密碼就是`臥底的摩斯密碼`。
+劇中永仁臥底檔案的密碼就是**臥底的摩斯密碼**。
 
 根據網路上的搜尋結果，摩斯密碼大多是使用`-`，但劇中卻是使用`_`。讓我們尊重原著，使用內建的[str_replace()](https://www.edgedb.com/docs/stdlib/string#function::std::str_replace)將臥底的摩斯密碼中的`-`換成`_`，並存成`alias`方便使用。
 ``` sql title="scenes/scene09/schema.esdl"
@@ -137,13 +137,13 @@ reset global current_user_id;
 ```
 
 #### 編寫`get_stored_encrypted_password`
-`get_stored_encrypted_password`模擬自資料庫中取出`hashed`過的加密密碼（雖然在這邊它看起來只是每次被呼叫時，計算`morse_code_of_undercover`的hash值）。
+`get_stored_encrypted_password`模擬自資料庫中取出hash過的加密密碼（雖然在這邊它看起來只是每次被呼叫時，計算`morse_code_of_undercover`的hash值）。
 ``` sql title="scenes/scene09/schema.esdl"
 --8<-- "scenes/scene09/_internal/schema.esdl:function_get_stored_encrypted_password"
 ```
 
 #### 編寫`validate_password`
-最後我們參考官方文件中的[範例](https://www.edgedb.com/docs/stdlib/pgcrypto#function::ext::pgcrypto::crypt)，使用`ext::pgcrypto::crypt()`來計算所輸入的密碼（`salt`為`hashed`過的加密密碼），是否會等於`hashed`過的加密密碼本身。如果是的話，代表我們輸入的是正確密碼，返回`true`，否則則返回`false`。
+最後我們參考官方文件中的[範例](https://www.edgedb.com/docs/stdlib/pgcrypto#function::ext::pgcrypto::crypt)，使用`ext::pgcrypto::crypt()`來計算所輸入的密碼（`salt`為hash過的加密密碼），是否會等於hash過的加密密碼本身。如果是的話，代表我們輸入的是正確密碼，返回`true`，否則則返回`false`。
 ``` sql title="scenes/scene09/schema.esdl"
 --8<-- "scenes/scene09/_internal/schema.esdl:function_validate_password"
 ```

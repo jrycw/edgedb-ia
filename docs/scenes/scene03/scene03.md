@@ -261,7 +261,7 @@ tags:
 ### 學習使用`backlinks`
 假設現在我們想知道永仁有哪些犯罪記錄，但是卻不想從`CriminalRecord`下手的話，[`backlinks`](https://www.edgedb.com/docs/edgeql/paths#backlinks)是一個不錯的選擇。
 
-由於`CriminalRecord`中的`involved`是個`multi link`，連接了`involved`及`Character`。`backlinks`讓我們可以反向來對這種關係進行`query`：
+由於`CriminalRecord`中的`involved`是個`multi link`，連接了`involved`及`Character`。`backlinks`讓我們可以反向來對這種關係進行query：
 
 * [`[is type]`](https://www.edgedb.com/docs/stdlib/set#operator::isintersect)讓我們指定要尋找哪一個`type`下的`link`。
 * `.<link`是指`[is type]`這個`type`下的哪一個`link`。
@@ -270,7 +270,7 @@ tags:
 --8<-- "scenes/scene03/_internal/query.edgeql:criminalrecord_backlink1"
 ```
 
-??? example "上面這段`query`的白話文"
+??? example "上面這段query的白話文"
     從`CriminalRecord`的`involved` `link`中，找出跟`chen`有關的`CriminalRecord`，命名為`criminal_records`，並使用`{**}`列出結果。
 
 ```
@@ -314,12 +314,12 @@ tags:
 }
 ```
 
-如果是想知道全部`Character`的`CriminalRecord`，`query`可以這麼寫：
+如果想知道全部`Character`的`CriminalRecord`，query可以這麼寫：
 ``` sql title="scenes/scene03/query.edgeql"
 --8<-- "scenes/scene03/_internal/query.edgeql:criminalrecord_backlink2"
 ```
 ??? tip "加上易辨別的`property`"
-    由於現在是對`Character`進行`query`（不是明確的`chen`了），加上`name`的話會比較好辨別，否則只能看到每個`Character`的`criminal_records`。
+    由於現在是對`Character`進行query（不是明確的`chen`了），加上`name`的話會比較好辨別，否則只能看到每個`Character`的`criminal_records`。
 
 ```
 {
@@ -378,7 +378,7 @@ tags:
     ```
 
 ## 無間假設
-我們假設無間道內警察只會都在同一個地方辦公，即`police_station`這個`alias`。從建明與黃sir的對話來看，無間道大多警察辦公場景應該是在警察總部。
+我們假設無間道內警察只會在同一個地方辦公，即`police_station`這個`alias`。從建明與黃sir的對話來看，大多數警察辦公場景應該是在警察總部。
 
 ## 無間吹水
-假設建明於1994年仍是散仔（`PC`），其於劇中識別證之更換時間為1999年7月30日，時任高級督察(`SIP`)，在四~五年間連升數級，這又是一個如葉校長般的人物呀。
+假設建明於1994年仍是散仔（`PC`），其於劇中識別證之更換時間為1999年7月30日，時任高級督察（`SIP`），在四~五年間連升數級，這又是一個如葉校長般的人物呀。

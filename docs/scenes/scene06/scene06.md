@@ -1,5 +1,6 @@
 ---
 tags:
+  - for loop
   - group
 ---
 
@@ -96,14 +97,14 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
 ``` sql title="scenes/scene06/query.edgeql"
 --8<-- "scenes/scene06/_internal/query.edgeql:group_police_rank1"
 ```
-??? info "Nested shape construction"
+??? info "Deep fetching"
     在熟悉上面這段query的時候，或許您會很想只顯示`key`裡面的`police_rank`及`elements`裡面的`name`，卻發現不知道怎麼達成。您可能會做以下嘗試：
     ``` sql
     #❌
     with p:= Police union PoliceSpy union GangsterSpy,
          g:= (group p by .police_rank),
     select g {key {police_rank}, 
-              elements{name}};
+              elements {name}};
     ```
     但正確的語法是需要加上`:`：
     ``` sql
@@ -140,7 +141,7 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
       {key: {police_rank: SP}, elements: {default::Police {name: '黃志誠'}}},
     }
     ```
-    這也是一個我們經常會突然`失憶`的地方，分享給大家做為參考。
+    這也是一個我們經常會突然**失憶**的地方，分享給大家做為參考。
 
 但這麼一來，結果會非常長，我們舉黃sir為例，因為`SP`級別只有他一人。
 ```
@@ -166,7 +167,7 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
 ```
 之所以會得到這麼長的結果是因為使用了`{**}`，但是我們的目的僅是想知道各個階級的人數，所以可以做下列修改：
 
-* 利用`group`的`key`可以得到`police_rank`（因為這個`property`就是我們在`by`時使用的），並在`g{ }`命名為`police_rank`。
+* 利用`group`的`key`可以得到`police_rank`（因為這個`property`就是我們在`by`時使用的），並在`g{ }`中命名為`police_rank`。
 * 利用`group`的`elements`得到該分類中每一個`object`（即`Police`或`PoliceSpy`或`GangsterSpy`），接著使用`count`來計算其數量，並在`g{ }`中命名為`counts`。
 * 最後，由於`police_rank`是一個`enum`，所以可以使用`order by`對其進行排序，並加上`desc`，這麼一來就會改成官階較大的排在前面。
 
@@ -190,7 +191,7 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
 * 主要執勤探員`SPC`十三位。
 * 臥底探員一位。
 
-編劇此時可以依據這個結果，來請教相關專業人士，看看這樣的人力配置是否合理。
+編劇此時可以依據這個結果，來請教相關專業人士這樣的人力配置是否合理。
 
 ### 學習使用`group` - 情境2
 假設片場工作人員在休息時間聊到，不知道劇中出現的地名：
@@ -219,7 +220,7 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
   {name_length: 2, counts: 3, names: {'佛堂', '天台', '警校'}},
 }
 ```
-這麼一來就會發現長度最長的地名是Hi-Fi鋪，長度為6。
+結果發現長度最長的地名是Hi-Fi鋪，長度為6。
 
 針對第二個問題，只需將`order by`的目標改為`counts`即可。
 ``` sql title="scenes/scene06/query.edgeql"
@@ -234,7 +235,7 @@ O記聯合CIB準備於今晚韓琛與泰國佬交易可卡因（古柯鹼）時�
 }
 ```
 
-這麼一來就會發現地名長度為4及2的組別都出現三次。
+結果發現地名長度為4及2的組別都出現三次。
 
 ### `insert`此場景的`scene`
 這裡選擇人物時，其實也可以像前面一樣使用`Police`及`Gangster`。但這麼一來，就是假設要選取全部的`Police`及`Gangster`，如果之後我們修改了前面幾個場景的query，在現在這種人物比較多的場景會難以偵錯（您可以假想`Scene`被極度簡化，只包含重要演員，但配角及台前幕後許多工作人員都未計入）。

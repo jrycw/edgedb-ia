@@ -57,8 +57,8 @@ tags:
 --8<-- "scenes/scene08/_internal/schema.esdl:object_type_Envelope"
 ```
 
-??? tip "`readonly` vs `update police`"
-    * `readonly`是用在`property`上的`constraint`，`update police`是適用在整個`object type`上。不過在我們這個例子中，因為沒有`allow` `update`，所以`Envelope`是不能`update`的，因此如果將`readonly`刪除也可以。此外，如果在這個例子中執行`update`query的話，EdgeDB並不會報錯，只會返回一個空`set`。
+??? tip "`readonly` vs `access policy`"
+    `readonly`是用在`property`上的`constraint`，`access policy`是適用在整個`object type`上。不過在我們這個例子中，因為沒有`allow` `update`，所以`Envelope`是不能`update`的，因此如果將`readonly`刪除也可以。此外，如果在這個例子中執行`update`query的話，EdgeDB並不會報錯，只會返回一個空`set`。
 
 ??? example "`access policy`的延伸應用"
     既然`access policy`可以讓我們限制`insert`的次數，這麼一來我們也可以延伸應用到對照警察職級表，來限制各職級的人數，例如只能`insert`一名處長（`CP`）級長官。
@@ -120,7 +120,7 @@ tags:
 
 這段query看起來有點複雜，我們逐個拆解：
 
-* 在`with`區塊中，利用[`array_agg`](https://www.edgedb.com/docs/stdlib/array#function::std::array_agg)將`Police.name`這個`set`變為`array`。接著利用[`array_join`](https://www.edgedb.com/docs/stdlib/array#function::std::array_join)將`array`中每一個`element`（`str`型態）用`, `連接起來，命名為`names`。
+* 在`with`區塊中，利用[`array_agg`](https://www.edgedb.com/docs/stdlib/array#function::std::array_agg)將`Police.name`這個`set`變為`array`。接著利用[`array_join`](https://www.edgedb.com/docs/stdlib/array#function::std::array_join)將`array`中每一個`element`（`str`型態）用`" "`連接起來，命名為`names`。
 * 在`with`區塊中，將預設`module`由`default`轉為`ext::pg_trgm`。
 * 因為轉變了預設`module`，所以可以直接使用`word_similar()`查詢。
 
@@ -150,7 +150,7 @@ tags:
 
 * 在`with`區塊中，尋找`IsPolice`中哪些人的`police_rank`是`PoliceRank.Protected`並命名為`is_police_spy`，此時他僅能得到`IsPolice`中的資訊（即`id`、`police_rank`、`dept`及`is_officer`而已）。
 * 在`with`區塊中，尋找`PoliceSpy`中哪些人的`id`在`is_police_spy`中並命名為`police_spy`。
-* 在`with`區塊中，使用`array_agg`將`police_spy.name`及`police_spy.name`合成一個`array`，接著使用`array_join`將這個`array`以`, `連接起來，
+* 在`with`區塊中，使用`array_agg`將`police_spy.name`及`police_spy.name`合成一個`array`，接著使用`array_join`將這個`array`以`" "`連接起來，
 並命名為`names`。
 * 在`with`區塊中，將預設`module`由`default`轉為`ext::pg_trgm`。
 * 因為轉變了預設`module`，所以可以直接使用`word_similar()`查詢。
@@ -185,7 +185,7 @@ tags:
 ``` sql
 # ❌
 with module ext::pg_trgm,
-       names:= array_join(array_agg(Police.name), ", "), 
+       names:= array_join(array_agg(Police.name), " "), 
 select word_similar("陳永仁", names);
 ```
 其報錯訊息為：
@@ -194,11 +194,11 @@ error: InvalidReferenceError: object type or alias 'ext::pg_trgm::Police' does n
 ```
 因為此時`module`已經由`default`轉為`ext::pg_trgm`，而EdgeDB於`ext::pg_trgm`中找不到`Police`，所以報錯。
 
-下列這個使用`default::Police.name`的query則可成功執行：
+使用`default::Police.name`的query則可成功執行：
 ``` sql
 # ✅
 with module ext::pg_trgm,
-       names:= array_join(array_agg(default::Police.name), ", "), 
+       names:= array_join(array_agg(default::Police.name), " "), 
 select word_similar("陳永仁", names);
 ```
 #### Free objects

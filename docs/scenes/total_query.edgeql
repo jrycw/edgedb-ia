@@ -27,7 +27,7 @@ insert GangsterSpy {
    actors := assert_single((select Actor filter .name in {"陳冠希"})),
 };
 
-select test_alias(); # {true}
+select test_alias();
 
 insert Scene {
     title:= "韓琛初現",
@@ -67,7 +67,7 @@ insert Police {
       }),
 };
 
-select test_alias(); # {true}
+select test_alias();
 
 insert ChenLauContact {
       how:= "面對面",
@@ -462,29 +462,29 @@ set {
     dept:= "投訴及內部調查科", 
 };
 
-with names:= array_join(array_agg(Police.name), ", "), 
+with names:= array_join(array_agg(Police.name), " "), 
        module ext::pg_trgm,
 select word_similar("陳永仁", names);
 
-with names:= array_join(array_agg(Police.name), ", "), 
+with names:= array_join(array_agg(Police.name), " "), 
        module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similar("陳永仁", names);
 
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仨", names);
 
@@ -510,7 +510,9 @@ insert Scene {
 
 #=================09=================
 set global current_user_id:= (select Police filter .police_rank=PoliceRank.SP limit 1).id;
-select test_alias();  # {true}
+
+select test_alias();
+
 reset global current_user_id;
 
 select validate_password(morse_code_of_undercover); # {true}

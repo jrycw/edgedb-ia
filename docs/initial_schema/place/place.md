@@ -28,7 +28,7 @@ tags:
 
 ## Object types
 ### Landmark 
-`Landmark`用來代表比較具代表性的地標。
+`Landmark`用來代表知名度較高的地標。
 ``` sql
 --8<-- "initial_schema/place/_internal/place.esdl:object_type_Landmark"
 ```

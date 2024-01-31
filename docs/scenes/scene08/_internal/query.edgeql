@@ -10,13 +10,13 @@ set {
 # --8<-- [end:update_lau]
 
 # --8<-- [start:word_similar1]
-with names:= array_join(array_agg(Police.name), ", "), 
+with names:= array_join(array_agg(Police.name), " "), 
        module ext::pg_trgm,
 select word_similar("陳永仁", names);
 # --8<-- [end:word_similar1]
 
 # --8<-- [start:word_similarity1]
-with names:= array_join(array_agg(Police.name), ", "), 
+with names:= array_join(array_agg(Police.name), " "), 
        module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 # --8<-- [end:word_similarity1]
@@ -24,7 +24,7 @@ select word_similarity("陳永仁", names);
 # --8<-- [start:word_similar2]
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similar("陳永仁", names);
 # --8<-- [end:word_similar2]
@@ -32,7 +32,7 @@ select word_similar("陳永仁", names);
 # --8<-- [start:word_similarity2]
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 # --8<-- [end:word_similarity2]
@@ -40,7 +40,7 @@ select word_similarity("陳永仁", names);
 # --8<-- [start:word_similarity3]
 with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
      police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), ", "), 
+     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仨", names);
 # --8<-- [end:word_similarity3]

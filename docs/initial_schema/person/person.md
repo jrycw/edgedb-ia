@@ -73,7 +73,7 @@ tags:
 
 * `classic_lines` `property`為一`array<str>`，用來記錄角色於劇中的名言。
 * `lover` `link`為劇中角色的戀人。
-* `actors` `multi link`為飾演劇中角色的演員（使用`multi`，因為一個角色可能有一個以上演員詮釋）。
+* `actors` `multi link`為飾演劇中角色的演員（使用`multi`，因為一個角色可能由一個以上演員詮釋）。
 
 ```sql
 --8<-- "initial_schema/person/_internal/person.esdl:object_type_Person"
@@ -116,7 +116,7 @@ default:= GangsterRank.Boss;
     ```
     `constraint expression on` 可接受一個`expression`來返回`true`或`false`，如果返回的是`true`的話，才能允許相關操作。而[`__subject__`](https://www.edgedb.com/docs/datamodel/constraints)代表此處將受限制的值（一個`GangsterRank scalar`）。
 
-此外，我們針對`GangsterBoss`這個`object type`也加上一個`constraint`來限制自己不能是自己的`gangster_boss`。其中`.gangster_boss`的`.`代表引用的是自身的`gangster_boss` `property`(定義於`Gangster`中)，而`__subject__`則代表自己（一個`GangsterBoss object`）。
+此外，我們針對`GangsterBoss`這個`object type`也加上一個`constraint`來限制自己不能是自己的`gangster_boss`。其中`.gangster_boss`的`.`代表引用的是自身的`gangster_boss` `property`（定義於`Gangster`中），而`__subject__`則代表自己（一個`GangsterBoss object`）。
 ``` sql
 constraint expression on (__subject__ != .gangster_boss) { 
     errmessage := "The boss can't be his/her own boss.";
