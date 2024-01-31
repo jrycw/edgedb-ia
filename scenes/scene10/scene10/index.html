@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -2007,19 +2007,19 @@
 </div>
 <h2 id="edgeql-query">EdgeQL query</h2>
 <h3 id="global-current_user_id">設定<code>global</code> <code>current_user_id</code></h3>
-<p>由於本場景需要多次<code>update</code> <code>chen</code>。為方便操作，我們<code>insert</code>一個<code>PoliceRank</code>為<code>DCP</code>的<code>Police object</code>，並將其<code>id</code>指定給<code>global current_user_id</code>。
+<p>由於本場景需要多次操作<code>PoliceSpy object</code>，我們可以<code>insert</code>一個<code>PoliceRank</code>為<code>DCP</code>的<code>Police object</code>，並將其<code>id</code>指定給<code>global current_user_id</code>。
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">insert</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;test_DCP&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">police_rank</span><span class="p">:</span><span class="o">=</span><span class="n">PoliceRank</span><span class="p">.</span><span class="n">DCP</span><span class="err">}</span><span class="p">;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">current_user_id</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">police_rank</span><span class="o">=</span><span class="n">PoliceRank</span><span class="p">.</span><span class="n">DCP</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">id</span><span class="p">;</span>
 </span></code></pre></div></p>
 <h3 id="update-chen"><code>update</code> <code>chen</code></h3>
-<p>更新永仁的經典台詞。
+<p>將永仁的經典台詞加入到<code>classic_lines</code> <code>property</code>中。
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">update</span><span class="w"> </span><span class="n">chen</span><span class="w"> </span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">set</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">classic_lines</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">classic_lines</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p">[</span><span class="ss">&quot;對唔住，我係差人。&quot;</span><span class="p">],</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div></p>
 <h3 id="update-lau"><code>update</code> <code>lau</code></h3>
-<p>更新建明的經典台詞。
+<p>將建明的經典台詞加入到<code>classic_lines</code> <code>property</code>中。
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">update</span><span class="w"> </span><span class="n">lau</span><span class="w"> </span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">set</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">classic_lines</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ss">&quot;我以前無得揀，我而家想做好人。&quot;</span><span class="p">],</span>
@@ -2042,9 +2042,9 @@
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div></p>
 <h3 id="insert"><code>insert</code>真．林國平</h3>
-<p>真沒想到，國平竟然也是韓琛的臥底，第一次看到這段時，真是驚訝呀！</p>
+<p>真沒想到，國平竟然也是韓琛的臥底，第一次看到這段時，真是驚訝不已！</p>
 <p>可是這麼一來，國平就不應該是<code>Police</code>而是<code>PoliceSpy</code>囉？我們應該刪掉<code>國平 Police object</code>，並新增一個<code>國平 PoliceSpy object</code>嗎？</p>
-<p>這樣的話，之前<code>國平 Police object</code>的相關記錄都會被刪除（例如：<code>CIBTeamTreat</code>），這樣合理嗎？又或者我們要重新去確認所有跟<code>國平 Police object</code>有關的<code>object</code>將其替換為<code>國平 PoliceSpy object</code>？</p>
+<p>這樣的話，之前<code>國平 Police object</code>的相關記錄都會被刪除（例如：<code>CIBTeamTreat</code>），這樣合理嗎？又或者我們應該重新去確認所有跟<code>國平 Police object</code>有關的<code>object</code>將其替換為<code>國平 PoliceSpy object</code>？</p>
 <p>該怎麼做其實沒有標準的答案，不過一個比較常見的方法是使用<code>soft delete</code>。使用一個類似<code>is_active</code>的<code>property</code>來表達該<code>object</code>的存取狀態，而不真正將其從資料庫中刪除。畢竟在最後一幕之前，我們的確不知道國平是臥底，<code>國平 Police object</code>是一個合適的表達。</p>
 <p>最後我們<code>insert</code>國平的<code>PoliceSpy object</code>如下：
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">with</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;林國平&quot;</span><span class="p">))</span>
@@ -2132,7 +2132,7 @@
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="n">lovers</span><span class="o">+=</span><span class="w"> </span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="nb">Character</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;May&quot;</span><span class="p">)),</span>
 </span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div>
-我們可以用下面query確認<code>chen</code>的<code>lovers</code>內確實有心兒及May。
+我們可以確認<code>chen</code>的<code>lovers</code>內確實有心兒及May。
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">select</span><span class="w"> </span><span class="n">chen</span><span class="p">.</span><span class="n">lovers</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{&#39;李心兒&#39;, &#39;May&#39;}
@@ -2157,7 +2157,7 @@
 最簡單的方法應該是<code>filter .name="test_DCP"</code>了吧，像是：
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;test_DCP&quot;</span><span class="p">;</span>
 </span></code></pre></div>
-此時，假設我們只有該<code>object</code> <code>str</code>型態的<code>id</code>的話，又該怎麼選取呢，您可能會寫出以下query：
+但是假設我們只有該<code>object</code> <code>str</code>型態的<code>id</code>的話，又該怎麼選取呢？您可能會寫出以下query：
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">with</span><span class="w"> </span><span class="n">pid</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">str</span><span class="o">&gt;</span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;test_DCP&quot;</span><span class="p">).</span><span class="n">id</span><span class="p">,</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">id</span><span class="o">=&lt;</span><span class="n">uuid</span><span class="o">&gt;</span><span class="n">pid</span><span class="p">;</span>
 </span></code></pre></div>
@@ -2196,7 +2196,7 @@
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">select</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Police</span><span class="o">&gt;</span><span class="n">pid</span><span class="p">;</span>
 </span></code></pre></div></p>
 <h3 id="_5">最後清理</h3>
-<p>讓我們用上述新技巧來刪除本場景一開始建立的<code>PoliceRank</code>為<code>DCP</code>的<code>Police object</code>，並<code>reset</code> <code>global</code> <code>current_user_id</code>。
+<p>讓我們用上述技巧來刪除一開始建立的<code>PoliceRank</code>為<code>DCP</code>的<code>Police object</code>，並<code>reset</code> <code>global</code> <code>current_user_id</code>。
 <div class="language-sql highlight"><span class="filename">scenes/scene10/query.edgeql</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">with</span><span class="w"> </span><span class="n">pid</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">str</span><span class="o">&gt;</span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;test_DCP&quot;</span><span class="p">).</span><span class="n">id</span><span class="p">,</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">delete</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Police</span><span class="o">&gt;&lt;</span><span class="n">uuid</span><span class="o">&gt;</span><span class="n">pid</span><span class="p">;</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>

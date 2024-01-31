@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1624,7 +1624,7 @@
   </p>
 <figcaption><a href="https://www.imdb.com/title/tt0338564/mediaindex">此劇照引用自IMDb-無間道</a></figcaption>
 </figure>
-<p>永仁與黃sir相約於天台交換情報，韓琛將於這星期進行毒品交易，地點未知。黃sir則說他費盡心力將永仁傷人的案子由坐牢改成看心理醫生，交待永仁要照做。永仁抱怨自己被黃sir騙了，說好只當三年臥底，結果現在都快十年了，不知道何時才能恢復警察身份。十年間發生了太多事，永仁看著黃sir送的手錶，他有時候真的不知道該用什麼心態面對黃sir（詳情請見無間道Ⅱ及無間道Ⅲ）。</p>
+<p>永仁與黃sir相約於天台交換情報，韓琛將於這星期進行毒品交易，地點未知。黃sir則說他費盡心力將永仁傷人的案子由坐牢改成看心理醫生，交待永仁要照做。永仁則抱怨自己被黃sir騙了，說好只當三年臥底，結果現在都快十年了，不知道何時才能恢復警察身份。十年間發生了太多事，永仁看著黃sir送的手錶，他有時候真的不知道該用什麼心態面對黃sir（詳情請見無間道Ⅱ及無間道Ⅲ）。</p>
 <h2 id="edgeql-query">EdgeQL query</h2>
 <h3 id="insert2002"><code>insert</code>此場景時間2002年</h3>
 <div class="language-sql highlight"><span class="filename">scenes/scene05/query.edgeql</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">insert</span><span class="w"> </span><span class="n">FuzzyTime</span><span class="w"> </span><span class="err">{</span><span class="n">fuzzy_year</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">2002</span><span class="err">}</span><span class="p">;</span>
@@ -1683,11 +1683,12 @@
 </span></code></pre></div></p>
 <h3 id="datetime"><code>datetime</code>的模糊加減法</h3>
 <p>假如我們想幫永仁算一下他所說的「三年之後又三年，三年之後又三年！十年都嚟緊頭啦」，大概是多久的話，可以使用<a href="https://www.edgedb.com/docs/stdlib/datetime#type::cal::relative_duration"><code>cal::relative_duration()</code></a>。</p>
-<p>我們假設永仁從1992年12月1日0時0分0秒，正式開始臥底工作。首先我們需要將這個時間轉換為<code>datetime</code>型態。您可以選擇使用<code>&lt;datetime&gt;</code>來<code>casting</code>或是使用<a href="https://www.edgedb.com/docs/stdlib/datetime#function::std::to_datetime"><code>to_datetime()</code></a>來轉換。</p>
+<p>我們假設永仁從1992年12月1日0時0分0秒，正式開始臥底工作。</p>
+<p>首先我們需要將這個時間轉換為<code>datetime</code>型態。您可以選擇使用<code>&lt;datetime&gt;</code>來<code>casting</code>或是使用<a href="https://www.edgedb.com/docs/stdlib/datetime#function::std::to_datetime"><code>to_datetime()</code></a>來轉換。</p>
 <details class="tip">
-<summary>Casting vs Function</summary>
+<summary><code>Casting</code> vs <code>function</code></summary>
 <p>初學的朋友可能會搞混這兩個方法。此時可以查看<a href="https://www.edgedb.com/docs/stdlib/datetime"><code>datetime</code></a>文件，通常沒有<code>()</code>的像是<code>datetime</code>或是<code>cal::local_datetime</code>，這代表是一種型態，可以於其後加上適當的<code>str</code>來<code>casting</code>。而像是有<code>to</code>開頭且有<code>()</code>的
-<code>to_datetime()</code>或是<code>cal::to_local_datetime()</code>，則代表<code>function</code>，需要參考其所提供的各種簽名來使用。EdgeDB可以針對同一個<code>function</code>名定義多次，每次可接受不同的變數，像是<code>to_datetime()</code>就提供六種可以呼叫的簽名，這種特性稱為<code>function overloaded</code>。</p>
+<code>to_datetime()</code>或是<code>cal::to_local_datetime()</code>，則代表<code>function</code>，需要參考其所提供的各種簽名來使用。EdgeDB可以針對同一個<code>function</code>名定義多次，接收不同的參數，像是<code>to_datetime()</code>就提供六種可以呼叫的簽名，這種特性稱為<code>function overloaded</code>。</p>
 </details>
 <p><div class="language-sql highlight"><span class="filename">scenes/scene05/query.edgeql</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">select</span><span class="w"> </span><span class="o">&lt;</span><span class="n">datetime</span><span class="o">&gt;</span><span class="ss">&quot;1992-12-01T00:00:00+08&quot;</span><span class="p">;</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">select</span><span class="w"> </span><span class="n">to_datetime</span><span class="p">(</span><span class="ss">&quot;1992-12-01T00:00:00+08&quot;</span><span class="p">);</span>
@@ -1696,7 +1697,7 @@
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{&lt;datetime&gt;&#39;1992-11-30T16:00:00Z&#39;}
 </span></code></pre></div></p>
-<p>接下來利用<code>cal::relative_duration</code>來<code>casting</code>一個接近十年時間的<code>str</code>，假設為9年10個月。沒錯，<code>cal::relative_duration</code>可以接受像<code>9 years 10 months</code>這麼人性化的輸入，是不是滿酷的呀!
+<p>接下來利用<code>cal::relative_duration</code>來<code>casting</code>一個接近十年時間的<code>str</code>，假設為9年10個月。沒錯，<code>cal::relative_duration</code>可以接受像<code>9 years 10 months</code>這麼人性化的輸入!
 <div class="language-sql highlight"><span class="filename">scenes/scene05/query.edgeql</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">select</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cal</span><span class="p">::</span><span class="n">relative_duration</span><span class="o">&gt;</span><span class="ss">&quot;9 years 10 months&quot;</span><span class="p">;</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>{&lt;cal::relative_duration&gt;&#39;P9Y10M&#39;}
@@ -1706,13 +1707,13 @@
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{&lt;datetime&gt;&#39;2002-09-30T16:00:00Z&#39;}
 </span></code></pre></div>
-最後將結果的<code>datetime</code>型態再轉為香港時間：
+最後將結果的<code>datetime</code>型態轉變為<code>local_datetime</code>型態：
 <div class="language-sql highlight"><span class="filename">scenes/scene05/query.edgeql</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">with</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="o">=</span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">&lt;</span><span class="n">datetime</span><span class="o">&gt;</span><span class="ss">&quot;1992-12-01T00:00:00+08&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cal</span><span class="p">::</span><span class="n">relative_duration</span><span class="o">&gt;</span><span class="ss">&quot;9 years 10 months&quot;</span><span class="p">)</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">select</span><span class="w"> </span><span class="n">cal</span><span class="p">::</span><span class="n">to_local_datetime</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Asia/hong_kong&quot;</span><span class="p">);</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>{&lt;cal::local_datetime&gt;&#39;2002-10-01T00:00:00&#39;}
 </span></code></pre></div>
-最後我們終於知道永仁與黃sir於本場景見面的時間，大概為2002年10月，這個計算大致符合劇中的時間線。</p>
+現在我們終於知道永仁與黃sir於本場景見面的時間，大概為2002年10月，這個計算大致符合劇中的時間線。</p>
 <h3 id="local_datetime"><code>local_datetime</code>的模糊加減法</h3>
 <p><code>datetime</code>的計算看起來比較複雜，因為牽扯到<code>timezone</code>。如果您想要計算的是<code>local_datetime</code>的話，那麼可以輕鬆不少。
 <div class="language-sql highlight"><span class="filename">scenes/scene05/query.edgeql</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">select</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cal</span><span class="p">::</span><span class="n">local_datetime</span><span class="o">&gt;</span><span class="ss">&quot;1992-12-01T00:00:00&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cal</span><span class="p">::</span><span class="n">relative_duration</span><span class="o">&gt;</span><span class="ss">&quot;9 years 10 months&quot;</span><span class="p">;</span>

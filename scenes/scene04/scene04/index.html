@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1632,10 +1632,10 @@
 </ul>
 <div class="admonition tip">
 <p class="admonition-title"><code>range</code> vs <code>multiranges</code></p>
-<p>判斷某個數字是否在單一區間內，可以使用<a href="https://www.edgedb.com/docs/stdlib/range"><code>range()</code></a>。但如果是有多個區間的話，則可以搭配<a href="https://www.edgedb.com/docs/stdlib/range#multiranges"><code>multirange()</code></a>來處理。</p>
+<p>判斷某個數字是否在單一區間內，可以使用<a href="https://www.edgedb.com/docs/stdlib/range"><code>range()</code></a>。但如果有多個區間的話，則可以搭配<a href="https://www.edgedb.com/docs/stdlib/range#multiranges"><code>multirange()</code></a>來處理。</p>
 </div>
 <p><code>is_hi_fi_store_open</code> <code>function</code>接收兩個變數，一個是<code>dow</code>（<code>DayOfWeek</code>型態）代表星期幾造訪，另一個是<code>visit_hour</code>（<code>int64</code>型態）代表幾點造訪，回傳值則為<code>bool</code>型態。</p>
-<p>我們將營業時間拆成三個<code>11~13</code>、<code>14~19</code>及<code>20~22</code>三個<code>range</code>並包成一個<code>array</code>後，傳給一個<code>multirange</code>，並在<code>with</code>區塊中將其命名為<code>open_hours</code>。</p>
+<p>我們將營業時間拆成<code>11~13</code>、<code>14~19</code>及<code>20~22</code>三個<code>range</code>並包成一個<code>array</code>後，傳給一個<code>multirange</code>，並在<code>with</code>區塊中將其命名為<code>open_hours</code>。</p>
 <p>接著判斷<code>dow</code>是否不是星期三，且<code>visit_hour</code>是否在<code>open_hours</code>區間內（使用<a href="https://www.edgedb.com/docs/stdlib/generic#function::std::contains"><code>contains</code></a>）。如果是的話，代表該時間為店家營業時間，回傳<code>true</code>；否則即為休息時間，回傳<code>false</code>。</p>
 <div class="language-sql highlight"><span class="filename">scenes/scene04/schema.esdl</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">function</span><span class="w"> </span><span class="n">is_hi_fi_store_open</span><span class="p">(</span><span class="n">dow</span><span class="p">:</span><span class="w"> </span><span class="n">DayOfWeek</span><span class="p">,</span><span class="w"> </span><span class="n">visit_hour</span><span class="p">:</span><span class="w"> </span><span class="n">int64</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bool</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">using</span><span class="w"> </span><span class="p">(</span>

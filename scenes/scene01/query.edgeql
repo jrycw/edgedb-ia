@@ -26,7 +26,7 @@ insert GangsterSpy {
    actors := assert_single((select Actor filter .name in {"陳冠希"})),
 };
 
-select test_alias(); # {true}
+select test_alias();
 
 insert Scene {
     title:= "韓琛初現",

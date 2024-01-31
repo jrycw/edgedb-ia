@@ -21,7 +21,7 @@ insert Police {
       }),
 };
 
-select test_alias(); # {true}
+select test_alias();
 
 insert ChenLauContact {
       how:= "面對面",

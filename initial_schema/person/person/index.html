@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1295,7 +1295,7 @@
 <ul>
 <li><code>classic_lines</code> <code>property</code>為一<code>array&lt;str&gt;</code>，用來記錄角色於劇中的名言。</li>
 <li><code>lover</code> <code>link</code>為劇中角色的戀人。</li>
-<li><code>actors</code> <code>multi link</code>為飾演劇中角色的演員（使用<code>multi</code>，因為一個角色可能有一個以上演員詮釋）。</li>
+<li><code>actors</code> <code>multi link</code>為飾演劇中角色的演員（使用<code>multi</code>，因為一個角色可能由一個以上演員詮釋）。</li>
 </ul>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">type</span><span class="w"> </span><span class="nb">Character</span><span class="w"> </span><span class="n">extending</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">classic_lines</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="n">str</span><span class="o">&gt;</span><span class="p">;</span>
@@ -1343,7 +1343,7 @@
     <code>constraint expression on</code> 可接受一個<code>expression</code>來返回<code>true</code>或<code>false</code>，如果返回的是<code>true</code>的話，才能允許相關操作。而<a href="https://www.edgedb.com/docs/datamodel/constraints"><code>__subject__</code></a>代表此處將受限制的值（一個<code>GangsterRank scalar</code>）。</p>
 </li>
 </ul>
-<p>此外，我們針對<code>GangsterBoss</code>這個<code>object type</code>也加上一個<code>constraint</code>來限制自己不能是自己的<code>gangster_boss</code>。其中<code>.gangster_boss</code>的<code>.</code>代表引用的是自身的<code>gangster_boss</code> <code>property</code>(定義於<code>Gangster</code>中)，而<code>__subject__</code>則代表自己（一個<code>GangsterBoss object</code>）。
+<p>此外，我們針對<code>GangsterBoss</code>這個<code>object type</code>也加上一個<code>constraint</code>來限制自己不能是自己的<code>gangster_boss</code>。其中<code>.gangster_boss</code>的<code>.</code>代表引用的是自身的<code>gangster_boss</code> <code>property</code>（定義於<code>Gangster</code>中），而<code>__subject__</code>則代表自己（一個<code>GangsterBoss object</code>）。
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">constraint</span><span class="w"> </span><span class="n">expression</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="p">(</span><span class="n">__subject__</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="p">.</span><span class="n">gangster_boss</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="n">errmessage</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;The boss can&#39;t be his/her own boss.&quot;</span><span class="p">;</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="err">}</span>

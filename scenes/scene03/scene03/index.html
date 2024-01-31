@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -2078,7 +2078,7 @@ Who knows? 讓我們暫時接受這個設定，即使它可能是個美麗的錯
 </ul>
 <h3 id="backlinks">學習使用<code>backlinks</code></h3>
 <p>假設現在我們想知道永仁有哪些犯罪記錄，但是卻不想從<code>CriminalRecord</code>下手的話，<a href="https://www.edgedb.com/docs/edgeql/paths#backlinks"><code>backlinks</code></a>是一個不錯的選擇。</p>
-<p>由於<code>CriminalRecord</code>中的<code>involved</code>是個<code>multi link</code>，連接了<code>involved</code>及<code>Character</code>。<code>backlinks</code>讓我們可以反向來對這種關係進行<code>query</code>：</p>
+<p>由於<code>CriminalRecord</code>中的<code>involved</code>是個<code>multi link</code>，連接了<code>involved</code>及<code>Character</code>。<code>backlinks</code>讓我們可以反向來對這種關係進行query：</p>
 <ul>
 <li><a href="https://www.edgedb.com/docs/stdlib/set#operator::isintersect"><code>[is type]</code></a>讓我們指定要尋找哪一個<code>type</code>下的<code>link</code>。</li>
 <li><code>.&lt;link</code>是指<code>[is type]</code>這個<code>type</code>下的哪一個<code>link</code>。</li>
@@ -2086,7 +2086,7 @@ Who knows? 讓我們暫時接受這個設定，即使它可能是個美麗的錯
 <div class="language-sql highlight"><span class="filename">scenes/scene03/query.edgeql</span><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">select</span><span class="w"> </span><span class="n">chen</span><span class="w"> </span><span class="err">{</span><span class="n">criminal_records</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="o">&lt;</span><span class="n">involved</span><span class="p">[</span><span class="k">is</span><span class="w"> </span><span class="n">CriminalRecord</span><span class="p">]</span><span class="w"> </span><span class="err">{</span><span class="o">**</span><span class="err">}}</span><span class="p">;</span>
 </span></code></pre></div>
 <details class="example">
-<summary>上面這段<code>query</code>的白話文</summary>
+<summary>上面這段query的白話文</summary>
 <p>從<code>CriminalRecord</code>的<code>involved</code> <code>link</code>中，找出跟<code>chen</code>有關的<code>CriminalRecord</code>，命名為<code>criminal_records</code>，並使用<code>{**}</code>列出結果。</p>
 </details>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>{
@@ -2128,12 +2128,12 @@ Who knows? 讓我們暫時接受這個設定，即使它可能是個美麗的錯
 </span><span id="__span-22-37"><a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a>  },
 </span><span id="__span-22-38"><a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a>}
 </span></code></pre></div>
-<p>如果是想知道全部<code>Character</code>的<code>CriminalRecord</code>，<code>query</code>可以這麼寫：
+<p>如果想知道全部<code>Character</code>的<code>CriminalRecord</code>，query可以這麼寫：
 <div class="language-sql highlight"><span class="filename">scenes/scene03/query.edgeql</span><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">select</span><span class="w"> </span><span class="nb">Character</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">criminal_records</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="o">&lt;</span><span class="n">involved</span><span class="p">[</span><span class="k">is</span><span class="w"> </span><span class="n">CriminalRecord</span><span class="p">]</span><span class="w"> </span><span class="err">{</span><span class="o">**</span><span class="err">}}</span><span class="p">;</span>
 </span></code></pre></div></p>
 <details class="tip">
 <summary>加上易辨別的<code>property</code></summary>
-<p>由於現在是對<code>Character</code>進行<code>query</code>（不是明確的<code>chen</code>了），加上<code>name</code>的話會比較好辨別，否則只能看到每個<code>Character</code>的<code>criminal_records</code>。</p>
+<p>由於現在是對<code>Character</code>進行query（不是明確的<code>chen</code>了），加上<code>name</code>的話會比較好辨別，否則只能看到每個<code>Character</code>的<code>criminal_records</code>。</p>
 </details>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>{
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  default::GangsterBoss {name: &#39;韓琛&#39;, criminal_records: {}},
@@ -2249,9 +2249,9 @@ Who knows? 讓我們暫時接受這個設定，即使它可能是個美麗的錯
 </span></code></pre></div>
 </details>
 <h2 id="_2">無間假設</h2>
-<p>我們假設無間道內警察只會都在同一個地方辦公，即<code>police_station</code>這個<code>alias</code>。從建明與黃sir的對話來看，無間道大多警察辦公場景應該是在警察總部。</p>
+<p>我們假設無間道內警察只會在同一個地方辦公，即<code>police_station</code>這個<code>alias</code>。從建明與黃sir的對話來看，大多數警察辦公場景應該是在警察總部。</p>
 <h2 id="_3">無間吹水</h2>
-<p>假設建明於1994年仍是散仔（<code>PC</code>），其於劇中識別證之更換時間為1999年7月30日，時任高級督察(<code>SIP</code>)，在四~五年間連升數級，這又是一個如葉校長般的人物呀。</p>
+<p>假設建明於1994年仍是散仔（<code>PC</code>），其於劇中識別證之更換時間為1999年7月30日，時任高級督察（<code>SIP</code>），在四~五年間連升數級，這又是一個如葉校長般的人物呀。</p>
 
 
 

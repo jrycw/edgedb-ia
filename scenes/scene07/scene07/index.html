@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1154,6 +1154,12 @@
     
     
     
+      <span class="md-tag">delegated</span>
+    
+  
+    
+    
+    
       <span class="md-tag">backlinks</span>
     
   
@@ -2099,7 +2105,7 @@
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>}
 </span></code></pre></div></p>
 <details class="tip">
-<summary>Shape construction for backlinks</summary>
+<summary>Deep fetching for backlinks</summary>
 <p>別忘了在<code>backlinks</code>中也可以使用<code>shape</code>，像是這邊的<code>{name}</code>，來選取想要的<code>property</code>或<code>link</code>。</p>
 <p>也就是說您可以寫出像是下面這段有趣的query：
 <div class="language-sql highlight"><span class="filename">scenes/scene07/query.edgeql</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">select</span><span class="w"> </span><span class="n">lau</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">nickname</span><span class="p">,</span><span class="w"> </span><span class="n">beverages</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="o">&lt;</span><span class="n">consumed_by</span><span class="p">[</span><span class="k">is</span><span class="w"> </span><span class="n">Beverage</span><span class="p">]</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="err">}}}</span><span class="p">;</span>
@@ -2307,7 +2313,7 @@
 </span></code></pre></div>
 </details>
 <h2 id="_2">無間吹水</h2>
-<p>根據訪談，曾志偉橫掃桌上飯菜的經典戲碼，黃秋生事先並不知情。但他根據自己的經驗判斷，曾志偉必定會這樣做，目的是使自己露出驚訝的臉。於是他在演戲時，已經做好準備後退的打算，因為不想穿著湯湯水水的衣服繼續演戲。</p>
+<p>根據訪談，曾志偉橫掃桌上飯菜的經典戲碼，黃秋生事先並不知情。但他根據自己的經驗判斷，曾志偉必定會這樣做，目的是使自己大吃一驚。於是他在演戲時，已經做好往後退的準備，因為不想穿著湯湯水水的衣服繼續演戲。</p>
 
 
 

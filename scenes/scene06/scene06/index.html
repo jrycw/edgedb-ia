@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1142,6 +1142,12 @@
     
     
     
+      <span class="md-tag">for loop</span>
+    
+  
+    
+    
+    
       <span class="md-tag">group</span>
     
   
@@ -1820,13 +1826,13 @@
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">select</span><span class="w"> </span><span class="k">g</span><span class="w"> </span><span class="err">{</span><span class="o">**</span><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div>
 <details class="info">
-<summary>Nested shape construction</summary>
+<summary>Deep fetching</summary>
 <p>在熟悉上面這段query的時候，或許您會很想只顯示<code>key</code>裡面的<code>police_rank</code>及<code>elements</code>裡面的<code>name</code>，卻發現不知道怎麼達成。您可能會做以下嘗試：
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">#</span><span class="err">❌</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">with</span><span class="w"> </span><span class="n">p</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="n">PoliceSpy</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="n">GangsterSpy</span><span class="p">,</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">     </span><span class="k">g</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">group</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="p">.</span><span class="n">police_rank</span><span class="p">),</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">select</span><span class="w"> </span><span class="k">g</span><span class="w"> </span><span class="err">{</span><span class="k">key</span><span class="w"> </span><span class="err">{</span><span class="n">police_rank</span><span class="err">}</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">          </span><span class="n">elements</span><span class="err">{</span><span class="n">name</span><span class="err">}}</span><span class="p">;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">          </span><span class="n">elements</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="err">}}</span><span class="p">;</span>
 </span></code></pre></div>
 但正確的語法是需要加上<code>:</code>：
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">#</span><span class="err">✅</span>
@@ -1861,7 +1867,7 @@
 </span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>  {key: {police_rank: SP}, elements: {default::Police {name: &#39;黃志誠&#39;}}},
 </span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>}
 </span></code></pre></div>
-這也是一個我們經常會突然<code>失憶</code>的地方，分享給大家做為參考。</p>
+這也是一個我們經常會突然<strong>失憶</strong>的地方，分享給大家做為參考。</p>
 </details>
 <p>但這麼一來，結果會非常長，我們舉黃sir為例，因為<code>SP</code>級別只有他一人。
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  ...
@@ -1886,7 +1892,7 @@
 </span></code></pre></div>
 之所以會得到這麼長的結果是因為使用了<code>{**}</code>，但是我們的目的僅是想知道各個階級的人數，所以可以做下列修改：</p>
 <ul>
-<li>利用<code>group</code>的<code>key</code>可以得到<code>police_rank</code>（因為這個<code>property</code>就是我們在<code>by</code>時使用的），並在<code>g{ }</code>命名為<code>police_rank</code>。</li>
+<li>利用<code>group</code>的<code>key</code>可以得到<code>police_rank</code>（因為這個<code>property</code>就是我們在<code>by</code>時使用的），並在<code>g{ }</code>中命名為<code>police_rank</code>。</li>
 <li>利用<code>group</code>的<code>elements</code>得到該分類中每一個<code>object</code>（即<code>Police</code>或<code>PoliceSpy</code>或<code>GangsterSpy</code>），接著使用<code>count</code>來計算其數量，並在<code>g{ }</code>中命名為<code>counts</code>。</li>
 <li>最後，由於<code>police_rank</code>是一個<code>enum</code>，所以可以使用<code>order by</code>對其進行排序，並加上<code>desc</code>，這麼一來就會改成官階較大的排在前面。</li>
 </ul>
@@ -1912,7 +1918,7 @@
 <li>主要執勤探員<code>SPC</code>十三位。</li>
 <li>臥底探員一位。</li>
 </ul>
-<p>編劇此時可以依據這個結果，來請教相關專業人士，看看這樣的人力配置是否合理。</p>
+<p>編劇此時可以依據這個結果，來請教相關專業人士這樣的人力配置是否合理。</p>
 <h3 id="group-2">學習使用<code>group</code> - 情境2</h3>
 <p>假設片場工作人員在休息時間聊到，不知道劇中出現的地名：</p>
 <ul>
@@ -1943,7 +1949,7 @@
 </span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  {name_length: 2, counts: 3, names: {&#39;佛堂&#39;, &#39;天台&#39;, &#39;警校&#39;}},
 </span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>}
 </span></code></pre></div>
-這麼一來就會發現長度最長的地名是Hi-Fi鋪，長度為6。</p>
+結果發現長度最長的地名是Hi-Fi鋪，長度為6。</p>
 <p>針對第二個問題，只需將<code>order by</code>的目標改為<code>counts</code>即可。
 <div class="language-sql highlight"><span class="filename">scenes/scene06/query.edgeql</span><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">with</span><span class="w"> </span><span class="k">g</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">group</span><span class="w"> </span><span class="n">Place</span><span class="w"> </span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">          </span><span class="k">using</span><span class="w"> </span><span class="n">name_length</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">len</span><span class="p">(.</span><span class="n">name</span><span class="p">)</span>
@@ -1960,7 +1966,7 @@
 </span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>  {name_length: 6, counts: 1, names: {&#39;Hi-Fi鋪&#39;}},
 </span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>}
 </span></code></pre></div></p>
-<p>這麼一來就會發現地名長度為4及2的組別都出現三次。</p>
+<p>結果發現地名長度為4及2的組別都出現三次。</p>
 <h3 id="insertscene"><code>insert</code>此場景的<code>scene</code></h3>
 <p>這裡選擇人物時，其實也可以像前面一樣使用<code>Police</code>及<code>Gangster</code>。但這麼一來，就是假設要選取全部的<code>Police</code>及<code>Gangster</code>，如果之後我們修改了前面幾個場景的query，在現在這種人物比較多的場景會難以偵錯（您可以假想<code>Scene</code>被極度簡化，只包含重要演員，但配角及台前幕後許多工作人員都未計入）。</p>
 <p>所以我們這邊示範使用<code>with</code>搭配<code>filter</code>，限縮選取範圍。

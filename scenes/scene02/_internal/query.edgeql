@@ -26,7 +26,7 @@ insert Police {
 # --8<-- [end:insert_wong]
 
 # --8<-- [start:test_alias]
-select test_alias(); # {true}
+select test_alias();
 # --8<-- [end:test_alias]
 
 # --8<-- [start:insert_chenlaucontact]

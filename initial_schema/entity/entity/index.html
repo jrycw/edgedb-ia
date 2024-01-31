@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1025,7 +1025,7 @@
 </details>
 <h2 id="scalar-types">Scalar types</h2>
 <h3 id="scenenumber">SceneNumber</h3>
-<p><code>SceneNumber</code> <code>extending</code> <code>sequence</code>而來，作為場景的計數器。需要留意的是<a href="https://www.edgedb.com/docs/stdlib/sequence#type::std::sequence">每一個<code>sequence</code>可以被多個<code>property</code>呼叫，共享同一個計數器</a>。如果單一<code>property</code>需要獨立的計數器，需要個別<code>extending</code> <code>sequence</code>生成特定的<code>sequence</code>。</p>
+<p><code>SceneNumber</code> <code>extending</code> <code>sequence</code>而來，作為場景的計數器。需要留意的是<a href="https://www.edgedb.com/docs/stdlib/sequence#type::std::sequence">每一個<code>sequence</code>可以被多個<code>property</code>呼叫，共享同一個計數器</a>。如果單一<code>property</code>需要獨立的計數器，需要各別<code>extending</code> <code>sequence</code>生成特定的<code>sequence</code>。</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">scalar</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="n">SceneNumber</span><span class="w"> </span><span class="n">extending</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
 </span></code></pre></div>
 <h2 id="abstract-object-types">Abstract Object types</h2>
@@ -1047,7 +1047,7 @@
 <li><code>references</code> <code>property</code>為參考資料連結。</li>
 <li><code>scene_number</code> <code>property</code>為自動產生編號的計數器。<ul>
 <li><code>constraint exclusive</code>確保不會有重覆的編號。</li>
-<li><a href="https://www.edgedb.com/docs/stdlib/sequence#function::std::sequence_next"><code>sequence_next()</code></a>作為<code>scene_number</code>的<code>default</code>，可以在每次生成新<code>Scene</code>時，自動產生編號。其中<code>introspect</code>是不可省略的關鍵字，原因是<code>sequence_next()</code>接收的參數必須是<code>ScalarType</code>。詳細的說明可以參考<a href="https://www.edgedb.com/easy-edgedb/chapter13#the-sequence-type">Easy EdgeDB chapter13</a>。</li>
+<li><a href="https://www.edgedb.com/docs/stdlib/sequence#function::std::sequence_next"><code>sequence_next()</code></a>作為<code>scene_number</code>的<code>default</code>，可以在每次<code>insert</code>新<code>Scene</code>時，自動產生編號。其中<code>introspect</code>是不可省略的關鍵字，原因是<code>sequence_next()</code>接收的參數必須是<code>ScalarType</code>。詳細的說明可以參考<a href="https://www.edgedb.com/easy-edgedb/chapter13#the-sequence-type">Easy EdgeDB chapter13</a>。</li>
 </ul>
 </li>
 </ul>

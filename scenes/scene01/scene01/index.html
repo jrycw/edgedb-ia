@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="EdgeDB">
+        <meta name="description" content="EdgeDB learning material in Traditional Chinese.">
       
       
         <meta name="author" content="Jerry Wu">
@@ -1431,8 +1431,8 @@
 <div class="language-sql highlight"><span class="filename">scenes/scene01/query.edgeql</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">insert</span><span class="w"> </span><span class="n">FuzzyTime</span><span class="w"> </span><span class="err">{</span><span class="n">fuzzy_year</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1992</span><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div>
 <h3 id="insert"><code>insert</code>韓琛及其演員曾志偉</h3>
-<p>韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在<code>classic_lines</code>的<code>array&lt;str&gt;</code>中。</p>
-<p>此外，雖然<code>actors</code>為<code>multi link</code>，可以包括多個演員。但是我們可以使用<a href="https://www.edgedb.com/docs/stdlib/set#function::std::assert_single"><code>assert_single()</code></a>來確保最多只會接收到一個曾志偉<code>object</code>。這麼一來，如果資料庫內已經有兩個<code>Actor object</code>的<code>name</code>都叫曾志偉時，這個query就會報錯。
+<p>韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在<code>classic_lines</code> <code>property</code>中。</p>
+<p>此外，雖然<code>actors</code>為<code>multi link</code>，可以包括多個演員。但是我們可以使用<a href="https://www.edgedb.com/docs/stdlib/set#function::std::assert_single"><code>assert_single()</code></a>來確保最多只會接收到一個曾志偉<code>Actor object</code>。這麼一來，如果資料庫內已經有兩個<code>Actor object</code>的<code>name</code>都叫曾志偉時，這個query就會報錯。
 <div class="language-sql highlight"><span class="filename">scenes/scene01/query.edgeql</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">insert</span><span class="w"> </span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">     </span><span class="n">name</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;曾志偉&quot;</span><span class="p">,</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">     </span><span class="n">eng_name</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;Eric&quot;</span><span class="p">,</span>
@@ -1462,7 +1462,7 @@
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div></p>
 <h3 id="alias">建立<code>alias</code></h3>
-<p>由於每次都要使用<code>(select ... filter ... .xxx=ooo)</code>的語法來選擇<code>object</code>頗為麻煩，針對常用到的<code>object</code>，可以直接在<code>schema</code>中定義<code>alias</code>，方便取用。我們這邊定義了一個<code>hon</code>（韓琛）、<code>lau</code>（劉建明）及<code>year_1992</code>（1992年）的<code>alias</code>。
+<p>由於每次都要使用<code>(select ... filter ... .xxx=ooo)</code>的語法來選擇<code>object</code>頗為麻煩，針對常用到的<code>object</code>，可以直接在schema中定義<code>alias</code>，方便取用。我們這邊定義了一個<code>hon</code>（韓琛）、<code>lau</code>（劉建明）及<code>year_1992</code>（1992年）的<code>alias</code>。
 <div class="language-sql highlight"><span class="filename">scenes/scene01/schema.esdl</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">alias</span><span class="w"> </span><span class="n">hon</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">assert_exists</span><span class="p">(</span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">GangsterBoss</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;韓琛&quot;</span><span class="p">)));</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">alias</span><span class="w"> </span><span class="n">lau</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">assert_exists</span><span class="p">(</span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">GangsterSpy</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;劉建明&quot;</span><span class="p">)));</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
@@ -1484,7 +1484,7 @@
 </div>
 <details class="example">
 <summary>alias year_1992的另一種寫法</summary>
-<p>也可以使用<code>fuzzy_fmt</code>這個<code>computed property</code>來做為filter的條件。
+<p>也可以使用<code>fuzzy_fmt</code>這個<code>computed property</code>來做為<code>filter</code>的條件。
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">alias</span><span class="w"> </span><span class="n">year_1992</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">assert_exists</span><span class="p">(</span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">FuzzyTime</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">fuzzy_fmt</span><span class="o">=</span><span class="ss">&quot;1992/MM/DD_HH24:MI:SS_ID&quot;</span><span class="p">)));</span>
 </span></code></pre></div>
 這種寫法比較快速，是我實際寫query會用的方法。但在定義schema時，我反而比較喜歡原先那種直接了當的寫法。</p>
@@ -1507,7 +1507,7 @@
 </span></code></pre></div></p>
 <div class="admonition warning">
 <p class="admonition-title"><code>function</code>的語法</p>
-<p>寫習慣<code>Python</code>的朋友，常常會在定義<code>function</code>時，在<code>()</code>後加上<code>:</code>。</p>
+<p>習慣寫Python的朋友，常常會在定義<code>function</code>時，在<code>()</code>後加上<code>:</code>。</p>
 </div>
 <p><code>test_alias</code>中會包含多個場景的sub-test（如<code>test_scene01_alias</code>），當每一個場景的<code>sub-test</code>都返回<code>true</code>時，<a href="https://www.edgedb.com/docs/stdlib/set#function::std::all"><code>all</code></a>會返回<code>true</code>，否則會報錯。而我們利用<a href="https://www.edgedb.com/docs/stdlib/set#operator::exists"><code>exists</code></a>檢查各場景中的<code>alias</code>是否存在，如果全部都存在的話，<code>all</code>會返回<code>true</code>，否則會報錯。</p>
 <div class="admonition failure">
@@ -1515,7 +1515,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>edgedb error: CardinalityViolationError: assert_exists violation: expression returned an empty set
 </span></code></pre></div>
 </div>
-<p>這麼一來當我們在操作資料庫時，可以隨時透過<code>test_alias</code>來確認每一個<code>alias</code>，是否都如我們預期地返回了剛好一個<code>object</code>。</p>
+<p>這麼一來當我們在操作資料庫時，可以隨時透過<code>test_alias</code>來確認每一個<code>alias</code>，是否都如預期地返回了剛好一個<code>object</code>。</p>
 <details class="danger">
 <summary>make end migration here（<code>scenes/scene01/schema.esdl</code>）</summary>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">did</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">alias</span><span class="w"> </span><span class="s1">&#39;default::hon&#39;</span><span class="o">?</span><span class="w"> </span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="k">c</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="o">?</span><span class="p">]</span>
@@ -1532,7 +1532,7 @@
 </details>
 <h3 id="test_alias">測試<code>test_alias</code></h3>
 <div class="language-sql highlight"><span class="filename">scenes/scene01/query.edgeql</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">#</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="n">migration</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">applied</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">query</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">select</span><span class="w"> </span><span class="n">test_alias</span><span class="p">();</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="err">{</span><span class="k">true</span><span class="err">}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">select</span><span class="w"> </span><span class="n">test_alias</span><span class="p">();</span>
 </span></code></pre></div>
 <h3 id="insertscene"><code>insert</code>此場景的<code>scene</code></h3>
 <p>因為剛剛已經透過<code>test_alias</code>測試了所有<code>alias</code>，所以這裡我們可以放心使用。值得注意的是，我們在<code>insert</code>這個<code>scene</code>時，除了同時<code>insert</code> <code>佛堂</code>這個<code>Location</code> <code>object</code>外，也同時將其指定為<code>where</code> <code>multi link</code>的值。這樣的模式在<code>EdgeQL</code>稱為<a href="https://www.edgedb.com/docs/edgeql/insert#nested-inserts">nested inserts</a>，是相當常見且實用的。</p>
@@ -1580,7 +1580,7 @@
 </span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">   </span><span class="n">actors</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">assert_single</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">Actor</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;陳冠希&quot;</span><span class="err">}</span><span class="p">)),</span>
 </span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="err">}</span><span class="p">;</span>
 </span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
-</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="k">select</span><span class="w"> </span><span class="n">test_alias</span><span class="p">();</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="err">{</span><span class="k">true</span><span class="err">}</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="k">select</span><span class="w"> </span><span class="n">test_alias</span><span class="p">();</span>
 </span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>
 </span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="k">insert</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">    </span><span class="n">title</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;韓琛初現&quot;</span><span class="p">,</span>
@@ -1597,7 +1597,7 @@
 </span></code></pre></div>
 </details>
 <h2 id="_3">無間假設</h2>
-<p>理論上，我們應該處理<code>建明</code>由<code>Gangster object</code>轉變到<code>GangsterSpy object</code>的過程，但這對於<code>scene01</code>來說，可能太過複雜，所以在此處直接<code>insert</code> <code>建明</code>為<code>GangsterSpy object</code>。同理，我們將於<code>scene02</code>直接<code>insert</code> <code>永仁</code>為<code>PoliceSpy object</code>，而不處理其由<code>Police object</code>轉變到<code>PoliceSpy object</code>的過程。</p>
+<p>理論上，我們應該處理建明由<code>Gangster object</code>轉變到<code>GangsterSpy object</code>的過程，但這對於<code>scene01</code>來說，可能太過複雜，所以在此處直接<code>insert</code>建明為<code>GangsterSpy object</code>。同理，我們將於<code>scene02</code>直接<code>insert</code>永仁為<code>PoliceSpy object</code>，而不處理其由<code>Police object</code>轉變到<code>PoliceSpy object</code>的過程。</p>
 <h2 id="_4">無間吹水</h2>
 <p>佛堂前六個骨灰罈暗指當年韓琛死於屯門的六個兄弟。他藉祭拜為由，於一眾小弟面前展現其「仁義之風」。</p>
 
