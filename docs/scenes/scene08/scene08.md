@@ -201,9 +201,8 @@ with module ext::pg_trgm,
        names:= array_join(array_agg(default::Police.name), " "), 
 select word_similar("陳永仁", names);
 ```
-#### Free objects
-[`Free objects`](https://www.edgedb.com/docs/edgeql/select#free-objects)讓我們可以在`with`區塊內，使用前面定義的變數。
-舉下面這個query來說：
+#### 變數引用
+我們可以在`with`區塊內，使用前面定義的變數，例如：
 ``` sql
 --8<-- "scenes/scene08/_internal/query.edgeql:word_similarity2"
 ```
