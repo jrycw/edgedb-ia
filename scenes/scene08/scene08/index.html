@@ -871,9 +871,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#free-objects" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      Free objects
+      變數引用
     </span>
   </a>
   
@@ -908,7 +908,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       無間吹水
     </span>
@@ -1150,9 +1150,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#free-objects" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      Free objects
+      變數引用
     </span>
   </a>
   
@@ -1187,7 +1187,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       無間吹水
     </span>
@@ -2312,9 +2312,8 @@
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">       </span><span class="k">names</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">array_join</span><span class="p">(</span><span class="n">array_agg</span><span class="p">(</span><span class="k">default</span><span class="p">::</span><span class="n">Police</span><span class="p">.</span><span class="n">name</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">),</span><span class="w"> </span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="k">select</span><span class="w"> </span><span class="n">word_similar</span><span class="p">(</span><span class="ss">&quot;陳永仁&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">names</span><span class="p">);</span>
 </span></code></pre></div></p>
-<h4 id="free-objects">Free objects</h4>
-<p><a href="https://www.edgedb.com/docs/edgeql/select#free-objects"><code>Free objects</code></a>讓我們可以在<code>with</code>區塊內，使用前面定義的變數。
-舉下面這個query來說：
+<h4 id="_3">變數引用</h4>
+<p>我們可以在<code>with</code>區塊內，使用前面定義的變數，例如：
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">with</span><span class="w"> </span><span class="n">is_police_spy</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">IsPolice</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">police_rank</span><span class="o">=</span><span class="n">PoliceRank</span><span class="p">.</span><span class="n">Protected</span><span class="p">),</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">     </span><span class="n">police_spy</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">PoliceSpy</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">is_police_spy</span><span class="p">.</span><span class="n">id</span><span class="p">),</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">     </span><span class="k">names</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">array_join</span><span class="p">(</span><span class="n">array_agg</span><span class="p">(</span><span class="n">Police</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="n">police_spy</span><span class="p">.</span><span class="n">name</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">),</span><span class="w"> </span>
@@ -2401,7 +2400,7 @@
 </span><span id="__span-25-51"><a id="__codelineno-25-51" name="__codelineno-25-51" href="#__codelineno-25-51"></a><span class="err">}</span><span class="p">;</span>
 </span></code></pre></div>
 </details>
-<h2 id="_3">無間吹水</h2>
+<h2 id="_4">無間吹水</h2>
 <p>黃sir於劇末的墓碑往生日期為2002年11月23日，而其識別證上更換日期卻為2008年7月31日。</p>
 
 
