@@ -800,7 +800,7 @@
           <li class="md-nav__item">
   <a href="#insertscene" class="md-nav__link">
     <span class="md-ellipsis">
-      insert此場景的scene
+      insert此場景的Scene
     </span>
   </a>
   
@@ -1085,7 +1085,7 @@
           <li class="md-nav__item">
   <a href="#insertscene" class="md-nav__link">
     <span class="md-ellipsis">
-      insert此場景的scene
+      insert此場景的Scene
     </span>
   </a>
   
@@ -1967,7 +1967,7 @@
 </span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>}
 </span></code></pre></div></p>
 <p>結果發現地名長度為4及2的組別都出現三次。</p>
-<h3 id="insertscene"><code>insert</code>此場景的<code>scene</code></h3>
+<h3 id="insertscene"><code>insert</code>此場景的<code>Scene</code></h3>
 <p>這裡選擇人物時，其實也可以像前面一樣使用<code>Police</code>及<code>Gangster</code>。但這麼一來，就是假設要選取全部的<code>Police</code>及<code>Gangster</code>，如果之後我們修改了前面幾個場景的query，在現在這種人物比較多的場景會難以偵錯（您可以假想<code>Scene</code>被極度簡化，只包含重要演員，但配角及台前幕後許多工作人員都未計入）。</p>
 <p>所以我們這邊示範使用<code>with</code>搭配<code>filter</code>，限縮選取範圍。
 <div class="language-sql highlight"><span class="filename">scenes/scene06/query.edgeql</span><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">with</span><span class="w"> </span><span class="n">policemen</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">Police</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">.</span><span class="n">dept</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;有組織罪案及三合會調查科(O記)&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;刑事情報科(CIB)&quot;</span><span class="err">}</span><span class="p">),</span>

@@ -668,7 +668,7 @@
           <li class="md-nav__item">
   <a href="#insertscene" class="md-nav__link">
     <span class="md-ellipsis">
-      insert此場景的scene
+      insert此場景的Scene
     </span>
   </a>
   
@@ -1031,7 +1031,7 @@
           <li class="md-nav__item">
   <a href="#insertscene" class="md-nav__link">
     <span class="md-ellipsis">
-      insert此場景的scene
+      insert此場景的Scene
     </span>
   </a>
   
@@ -1534,7 +1534,7 @@
 <div class="language-sql highlight"><span class="filename">scenes/scene01/query.edgeql</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">#</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="n">migration</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">applied</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">query</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">select</span><span class="w"> </span><span class="n">test_alias</span><span class="p">();</span>
 </span></code></pre></div>
-<h3 id="insertscene"><code>insert</code>此場景的<code>scene</code></h3>
+<h3 id="insertscene"><code>insert</code>此場景的<code>Scene</code></h3>
 <p>因為剛剛已經透過<code>test_alias</code>測試了所有<code>alias</code>，所以這裡我們可以放心使用。值得注意的是，我們在<code>insert</code>這個<code>scene</code>時，除了同時<code>insert</code> <code>佛堂</code>這個<code>Location</code> <code>object</code>外，也同時將其指定為<code>where</code> <code>multi link</code>的值。這樣的模式在<code>EdgeQL</code>稱為<a href="https://www.edgedb.com/docs/edgeql/insert#nested-inserts">nested inserts</a>，是相當常見且實用的。</p>
 <div class="language-sql highlight"><span class="filename">scenes/scene01/query.edgeql</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">insert</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="err">{</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="n">title</span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;韓琛初現&quot;</span><span class="p">,</span>
