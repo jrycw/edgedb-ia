@@ -129,7 +129,7 @@ tags:
 {'李心兒', 'May'}
 ```
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene10/query.edgeql"
 --8<-- "scenes/scene10/_internal/query.edgeql:insert_scene"
 ```

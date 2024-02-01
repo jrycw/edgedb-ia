@@ -111,7 +111,7 @@ tags:
 --8<-- "scenes/scene01/_internal/query.edgeql:test_alias"
 ```
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 因為剛剛已經透過`test_alias`測試了所有`alias`，所以這裡我們可以放心使用。值得注意的是，我們在`insert`這個`scene`時，除了同時`insert` `佛堂`這個`Location` `object`外，也同時將其指定為`where` `multi link`的值。這樣的模式在`EdgeQL`稱為[nested inserts](https://www.edgedb.com/docs/edgeql/insert#nested-inserts)，是相當常見且實用的。
 
 ``` sql title="scenes/scene01/query.edgeql"

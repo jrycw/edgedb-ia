@@ -137,7 +137,7 @@ tags:
     永仁於劇末的墓碑出生日期為1966年10月25日。
 
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene05/query.edgeql"
 --8<-- "scenes/scene05/_internal/query.edgeql:insert_scene"
 ```

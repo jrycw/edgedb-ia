@@ -2,7 +2,7 @@
 ## 緣起
 這個project的概念源自[Easy EdgeDB](https://www.edgedb.com/easy-edgedb)。書內用吸血鬼為主題，帶領讀者一步步跟著故事，使用EdgeDB來模擬，是一份相當好的學習資源。
 
-在閱讀完`Easy EdgeDB`之後，因為太喜歡這種學習方式，所以我決定找一部很喜歡的電影，[無間道系列第一集](https://zh.wikipedia.org/zh-tw/%E7%84%A1%E9%96%93%E9%81%93)，以類似的技巧來練習EdgeDB。
+在閱讀完Easy EdgeDB之後，因為太喜歡這種學習方式，所以我決定找一部很喜歡的電影，[無間道系列第一集](https://zh.wikipedia.org/zh-tw/%E7%84%A1%E9%96%93%E9%81%93)，以類似的技巧來練習EdgeDB。
 
 如果您在尋找EdgeDB的中文教材，相信這個project應該能帶給您些許收獲。
 

@@ -211,7 +211,7 @@ select word_similar("陳永仁", names);
 * `names`引用了前面定義的`police_spy`。
 
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene08/query.edgeql"
 --8<-- "scenes/scene08/_internal/query.edgeql:insert_scene"
 ```

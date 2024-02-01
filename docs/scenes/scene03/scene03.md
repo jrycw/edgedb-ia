@@ -366,7 +366,7 @@ tags:
 }
 ```
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene03/query.edgeql"
 --8<-- "scenes/scene03/_internal/query.edgeql:insert_scene"
 ```

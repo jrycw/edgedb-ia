@@ -252,7 +252,7 @@ reset global current_user_id;
 --8<-- "scenes/scene09/_internal/query.edgeql:insert_chenlaucontact2"
 ```
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene09/query.edgeql"
 --8<-- "scenes/scene09/_internal/query.edgeql:insert_scene"
 ```

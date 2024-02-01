@@ -247,7 +247,7 @@ tags:
 --8<-- "scenes/scene07/_internal/query.edgeql:insert_chenlaucontact"
 ```
 
-### `insert`此場景的`scene`
+### `insert`此場景的`Scene`
 ``` sql title="scenes/scene07/query.edgeql"
 --8<-- "scenes/scene07/_internal/query.edgeql:insert_scene"
 ```
