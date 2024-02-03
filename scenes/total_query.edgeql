@@ -707,6 +707,22 @@ set {
 
 select chen.lovers.name;
 
+update Character filter .name="陳永仁"
+set {lovers:= (select Character filter .name="李心兒")};
+
+update chen
+set {lovers:= (select Character filter .name="李心兒")};
+
+with ch:= (select Character filter .name="陳永仁")
+update ch
+set {lovers:= (select Character filter .name="李心兒")};
+
+update PoliceSpy filter .name="陳永仁"
+set {lovers:= (select Character filter .name="李心兒")};
+
+update Character filter .name="陳永仁"
+set {lovers:= (select detached Character filter .name="李心兒")};
+
 
 insert Scene {
       title:= "我想做個好人", 

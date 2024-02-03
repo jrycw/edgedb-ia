@@ -111,6 +111,32 @@ set {
 select chen.lovers.name;
 # --8<-- [end:check_chen_lovers]
 
+# --8<-- [start:update_chen4_1_ng]
+update Character filter .name="陳永仁"
+set {lovers:= (select Character filter .name="李心兒")};
+# --8<-- [end:update_chen4_1_ng]
+
+# --8<-- [start:update_chen4_2_ok]
+update chen
+set {lovers:= (select Character filter .name="李心兒")};
+# --8<-- [end:update_chen4_2_ok]
+
+# --8<-- [start:update_chen4_3_ok]
+with ch:= (select Character filter .name="陳永仁")
+update ch
+set {lovers:= (select Character filter .name="李心兒")};
+# --8<-- [end:update_chen4_3_ok]
+
+# --8<-- [start:update_chen4_4_ok]
+update PoliceSpy filter .name="陳永仁"
+set {lovers:= (select Character filter .name="李心兒")};
+# --8<-- [end:update_chen4_4_ok]
+
+# --8<-- [start:update_chen4_detached]
+update Character filter .name="陳永仁"
+set {lovers:= (select detached Character filter .name="李心兒")};
+# --8<-- [end:update_chen4_detached]
+
 ############################### Actress end ###############################
 
 # --8<-- [start:insert_scene]
