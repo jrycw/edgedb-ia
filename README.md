@@ -6,7 +6,19 @@
 
 我們會先建立一個初始schema，裡面包含了基本的人時地事。接著再從劇中選出十幕，於每幕中交待劇情，熟悉query寫法、逐步改善schema並進行migration。
 
-如果您在尋找EdgeDB的中文教材，相信這個project應該能帶給您些許收獲。
+如果您在尋找[EdgeDB的正體中文教材](https://jrycw.github.io/edgedb-ia/)，相信這個project應該能帶給您些許收獲。
+
+## Scenes
+* [01 - 韓琛初現](https://jrycw.github.io/edgedb-ia/scenes/scene01/scene01/)
+* [02 - 我想跟他換](https://jrycw.github.io/edgedb-ia/scenes/scene02/scene02/)
+* [03 - 黑白顛倒](https://jrycw.github.io/edgedb-ia/scenes/scene03/scene03/)
+* [04 - 被遺忘的時光](https://jrycw.github.io/edgedb-ia/scenes/scene04/scene04/)
+* [05 - 三年之後又三年](https://jrycw.github.io/edgedb-ia/scenes/scene05/scene05/)
+* [06 - 有內鬼終止交易](https://jrycw.github.io/edgedb-ia/scenes/scene06/scene06/)
+* [07 - 互猜底牌](https://jrycw.github.io/edgedb-ia/scenes/scene07/scene07/)
+* [08 - 誰是內鬼](https://jrycw.github.io/edgedb-ia/scenes/scene08/scene08/)
+* [09 - 真相大白](https://jrycw.github.io/edgedb-ia/scenes/scene09/scene09/)
+* [10 - 我想做個好人](https://jrycw.github.io/edgedb-ia/scenes/scene10/scene10/)
 
 ## Initial schema
 ``` elm
