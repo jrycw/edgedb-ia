@@ -4,6 +4,8 @@
 
 在閱讀完Easy EdgeDB之後，因為太喜歡這種學習方式，所以我決定找一部很喜歡的電影，[無間道系列第一集](https://zh.wikipedia.org/zh-tw/%E7%84%A1%E9%96%93%E9%81%93)，以類似的技巧來練習EdgeDB。
 
+我們會先建立一個初始schema，裡面包含了基本的人時地事。接著再從劇中選出十幕，於每幕中交待劇情，熟悉query寫法、逐步改善schema並進行migration。
+
 如果您在尋找EdgeDB的中文教材，相信這個project應該能帶給您些許收獲。
 
 ## Initial schema
