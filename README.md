@@ -111,7 +111,11 @@ module default {
     }
 
     type PoliceSpy extending Character, IsSpy;
-    type GangsterSpy extending Character, IsSpy;
+    type GangsterSpy extending Character, IsSpy {
+        overloaded police_rank: PoliceRank {
+            default:= PoliceRank.Protected;
+        }
+    };
 
     type Landmark extending Place;
     type Location extending Place;
@@ -332,7 +336,11 @@ module default {
 
     };
     
-    type GangsterSpy extending Character, IsSpy;
+    type GangsterSpy extending Character, IsSpy {
+        overloaded police_rank: PoliceRank {
+            default:= PoliceRank.Protected;
+        }
+    };
 
     type Landmark extending Place;
     type Location extending Place;
