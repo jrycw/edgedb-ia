@@ -50,4 +50,6 @@ type GangsterBoss extending Gangster {
 }
 
 type PoliceSpy extending Character, IsSpy;
-type GangsterSpy extending Character, IsSpy;
+type GangsterSpy extending Character, IsSpy {
+    police_rank:= PoliceRank.Protected
+};
