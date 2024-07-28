@@ -1,6 +1,6 @@
 ---
 tags:
-  - access policies
+  - access policy
   - ext::pg_trgm
 ---
 
@@ -138,23 +138,13 @@ tags:
 
 ### 平時時空的建明
 #### `word_similar()`
-假設平時時空的建明，得知警隊除了平常可以接觸的資料庫外，還有一個機密資料庫，所有臥底檔案都在其中，而他已設法取得權限。
-因為擁有存取`IsPolice`及`PoliceSpy`兩個`object type`的權限，他將可以進行下列query：
+假設平時時空的建明，得知警隊除了平常可以接觸的資料庫外，還有一個機密資料庫，所有臥底檔案都在其中，而他已設法取得權限。此時他將可以進行下列query：
 ``` sql title="scenes/scene08/query.edgeql"
 --8<-- "scenes/scene08/_internal/query.edgeql:word_similar2"
 ```
 ```
 {true}
 ```
-逐步拆解這段query：
-
-* 在`with`區塊中，尋找`IsPolice`中哪些人的`police_rank`是`PoliceRank.Protected`並命名為`is_police_spy`，此時他僅能得到`IsPolice`中的資訊（即`id`、`police_rank`、`dept`及`is_officer`而已）。
-* 在`with`區塊中，尋找`PoliceSpy`中哪些人的`id`在`is_police_spy`中並命名為`police_spy`。
-* 在`with`區塊中，使用`array_agg`將`police_spy.name`及`police_spy.name`合成一個`array`，接著使用`array_join`將這個`array`以`" "`連接起來，
-並命名為`names`。
-* 在`with`區塊中，將預設`module`由`default`轉為`ext::pg_trgm`。
-* 因為轉變了預設`module`，所以可以直接使用`word_similar()`查詢。
-
 這一次平時時空的建明得到`true`，成功找出永仁。
 
 #### `word_similarity()`
@@ -170,7 +160,7 @@ tags:
 
 此外，我們假設建明將`陳永仁`誤植為`陳永仨`，其query會像是：
 ``` sql title="scenes/scene08/query.edgeql"
---8<-- "scenes/scene08/_internal/query.edgeql:word_similarity3"
+--8<-- "scenes/scene08/_internal/query.edgeql:word_similarity2_typo"
 ```
 ```
 {0.5}
@@ -204,11 +194,14 @@ select word_similar("陳永仁", names);
 #### 變數引用
 我們可以在`with`區塊內，使用前面定義的變數，例如：
 ``` sql
---8<-- "scenes/scene08/_internal/query.edgeql:word_similarity2"
+with police_names:= Police.name,
+     police_spy_names:= PoliceSpy.name,
+     names:= array_join(array_agg(police_names union police_spy_names), " "), 
+     module ext::pg_trgm,
+select word_similarity("陳永仨", names);
 ```
 
-* `police_spy`引用了前面定義的`is_police_spy`。
-* `names`引用了前面定義的`police_spy`。
+* `names`引用了前面定義的`police_names` 及`police_spy_names`。
 
 
 ### `insert`此場景的`Scene`

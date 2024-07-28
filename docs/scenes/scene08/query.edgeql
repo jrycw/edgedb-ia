@@ -13,21 +13,15 @@ with names:= array_join(array_agg(Police.name), " "),
        module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similar("陳永仁", names);
 
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仨", names);
 

@@ -15,12 +15,12 @@ tags:
         ```
 
     === "1st migration" 
-        ``` sql hl_lines="134-135 152 164-169" title="scenes/scene02/schema_1st_migration.esdl"
+        ``` sql hl_lines="138-139 156 168-173" title="scenes/scene02/schema_1st_migration.esdl"
         --8<-- "scenes/scene02/schema_1st_migration.esdl"
         ```
 
     === "end migration" 
-        ``` sql hl_lines="120-123" title="scenes/scene02/schema.esdl"
+        ``` sql hl_lines="124-127" title="scenes/scene02/schema.esdl"
         --8<-- "scenes/scene02/schema.esdl"
         ```
 ## 劇情提要
@@ -34,13 +34,13 @@ tags:
 
 ## EdgeQL query
 ### `insert`陳永仁及其少年時期演員余文樂
-練習使用`nested inserts`來同時`insert`陳永仁及演員余文樂。
+練習使用`nested insert`來同時`insert`陳永仁及演員余文樂。
 ``` sql title="scenes/scene02/query.edgeql"
 --8<-- "scenes/scene02/_internal/query.edgeql:insert_chen"
 ```
 
 ### `insert`黃志誠及其演員黃秋生
-練習使用`nested inserts`來同時`insert`黃志誠及演員黃秋生。
+練習使用`nested insert`來同時`insert`黃志誠及演員黃秋生。
 ``` sql title="scenes/scene02/query.edgeql"
 --8<-- "scenes/scene02/_internal/query.edgeql:insert_wong"
 ```

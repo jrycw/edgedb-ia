@@ -15,7 +15,7 @@ tags:
         ```
 
     === "end migration" 
-        ``` sql hl_lines="182-192 225-239" title="scenes/scene04/schema.esdl"
+        ``` sql hl_lines="186-196 229-243" title="scenes/scene04/schema.esdl"
         --8<-- "scenes/scene04/schema.esdl"
         ```
 

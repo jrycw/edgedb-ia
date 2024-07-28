@@ -17,9 +17,9 @@ set {
 };
 # --8<-- [end:update_lau1]
 
-# --8<-- [start:insert_big_b_as_police_spy]
+# --8<-- [start:insert_big_b_as_gangster_spy]
 with b:= assert_single((select Police filter .name="林國平"))
-insert PoliceSpy {
+insert GangsterSpy {
       name:= b.name,
       nickname:= b.nickname,
       police_rank:= b.police_rank,
@@ -27,7 +27,7 @@ insert PoliceSpy {
       dept:= b.dept,
       actors:= b.actors
 };
-# --8<-- [end:insert_big_b_as_police_spy]
+# --8<-- [end:insert_big_b_as_gangster_spy]
 
 
 # --8<-- [start:insert_chenlaucontact]
@@ -92,7 +92,7 @@ set {
 insert Character{
     name:= "May",
     eng_name:= "May",
-    lover:= chen,
+    lovers:= chen,
     actors:= (insert Actor{
         name:= "蕭亞軒",
         eng_name:= "Elva",
@@ -132,10 +132,10 @@ update PoliceSpy filter .name="陳永仁"
 set {lovers:= (select Character filter .name="李心兒")};
 # --8<-- [end:update_chen4_4_ok]
 
-# --8<-- [start:update_chen4_detached]
+# --8<-- [start:update_chen4_5_detached]
 update Character filter .name="陳永仁"
 set {lovers:= (select detached Character filter .name="李心兒")};
-# --8<-- [end:update_chen4_detached]
+# --8<-- [end:update_chen4_5_detached]
 
 ############################### Actress end ###############################
 

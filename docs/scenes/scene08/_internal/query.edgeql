@@ -22,28 +22,22 @@ select word_similarity("陳永仁", names);
 # --8<-- [end:word_similarity1]
 
 # --8<-- [start:word_similar2]
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similar("陳永仁", names);
 # --8<-- [end:word_similar2]
 
 # --8<-- [start:word_similarity2]
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仁", names);
 # --8<-- [end:word_similarity2]
 
-# --8<-- [start:word_similarity3]
-with is_police_spy:= (select IsPolice filter .police_rank=PoliceRank.Protected),
-     police_spy:= (select PoliceSpy filter .id in is_police_spy.id),
-     names:= array_join(array_agg(Police.name union police_spy.name), " "), 
+# --8<-- [start:word_similarity2_typo]
+with names:= array_join(array_agg(Police.name union PoliceSpy.name), " "), 
      module ext::pg_trgm,
 select word_similarity("陳永仨", names);
-# --8<-- [end:word_similarity3]
+# --8<-- [end:word_similarity2_typo]
 
 # --8<-- [start:insert_scene]
 insert Scene {

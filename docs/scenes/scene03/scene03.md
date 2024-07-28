@@ -3,7 +3,7 @@ tags:
   - rewrite
   - for loop
   - tuple
-  - backlinks
+  - backlink
 ---
 
 # 03 - 黑白顛倒
@@ -17,12 +17,12 @@ tags:
         ```
 
     === "1st migration" 
-        ``` sql hl_lines="142 154-163 170 189-194" title="scenes/scene03/schema_1st_migration.esdl"
+        ``` sql hl_lines="146 158-167 174 193-198" title="scenes/scene03/schema_1st_migration.esdl"
         --8<-- "scenes/scene03/schema_1st_migration.esdl"
         ```
 
     === "end migration" 
-        ``` sql hl_lines="54 122-135" title="scenes/scene03/schema.esdl"
+        ``` sql hl_lines="54 126-139" title="scenes/scene03/schema.esdl"
         --8<-- "scenes/scene03/schema.esdl"
         ```
 ## 劇情提要
@@ -46,7 +46,7 @@ tags:
 ```
 
 ### 建立`alias`及編寫測試`alias`的`function` 
-定義一個`year_1994`（1994年）及`police_station`（警察局）的`alias`。
+建立一個`year_1994`（1994年）及`police_station`（警察局）的`alias`。
 ``` sql title="scenes/scene03/schema_1st_migration.esdl"
 --8<-- "scenes/scene03/_internal/schema.esdl:alias_year_1994"
 
@@ -134,7 +134,7 @@ tags:
     });
     ```
 ??? info "如果`insert`順序很重要"
-    由於`set`是無序的，所以`insert`的順序並不能保證。如果想要有確定的`insert`順序，需要搭配`array`與[`range_unpack`](https://www.edgedb.com/docs/stdlib/range#function::std::range_unpack)。
+    由於`EdgeDBset`是無序的，所以`insert`的順序並不能保證。如果想要有確定的`insert`順序，需要搭配`array`與[`range_unpack`](https://www.edgedb.com/docs/stdlib/range#function::std::range_unpack)。
     ``` sql
     with records:= [("CCR9314768", "OFFNCE: A.O.A.B.H   "), ("RN992317", "CD-POD   ")],
         record_len:= len(records),
@@ -148,7 +148,7 @@ tags:
     其原理是`array`是有序的，可以使用[`array_get`](https://www.edgedb.com/docs/stdlib/array#function::std::array_get)來索引，而`range_unpack`可以有序地返回`range`內的值。不過，這樣的需求應該不太常見。
 
 ### `select` `CriminalRecord {**}`
-我們可以使用[`splats`](https://www.edgedb.com/docs/edgeql/select#splats)的語法，來看看兩次`insert`是否成功。
+我們可以使用[`splat`](https://www.edgedb.com/docs/edgeql/select#splats)的語法，來看看兩次`insert`是否成功。
 ??? question "`select type {*}` vs `select type {**}`"
     * `select type {*}`可以列出一個`type`的所有`property`。
     * `select type {**}`除了可以列出`select type {*}`所列出的，還可以列出`type`所有的`link type`（但只會列出一層深度，不會遞迴全部列出）。
@@ -258,10 +258,10 @@ tags:
 * `modified_at`自動於`update`時更新。
 * 使用`str_trim_end`成功去除了`code` `property`後的多餘空格。
 
-### 學習使用`backlinks`
-假設現在我們想知道永仁有哪些犯罪記錄，但是卻不想從`CriminalRecord`下手的話，[`backlinks`](https://www.edgedb.com/docs/edgeql/paths#backlinks)是一個不錯的選擇。
+### 學習使用`backlink`
+假設現在我們想知道永仁有哪些犯罪記錄，但是卻不想從`CriminalRecord`下手的話，[`backlink`](https://www.edgedb.com/docs/edgeql/paths#backlinks)是一個不錯的選擇。
 
-由於`CriminalRecord`中的`involved`是個`multi link`，連接了`involved`及`Character`。`backlinks`讓我們可以反向來對這種關係進行query：
+由於`CriminalRecord`中的`involved`是個`multi link`，連接了`involved`及`Character`。`backlink`讓我們可以反向來對這種關係進行query：
 
 * [`[is type]`](https://www.edgedb.com/docs/stdlib/set#operator::isintersect)讓我們指定要尋找哪一個`type`下的`link`。
 * `.<link`是指`[is type]`這個`type`下的哪一個`link`。

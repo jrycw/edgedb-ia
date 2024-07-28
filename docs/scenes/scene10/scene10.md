@@ -60,15 +60,15 @@ tags:
 ### `insert`真．林國平
 真沒想到，國平竟然也是韓琛的臥底，第一次看到這段時，真是驚訝不已！
 
-可是這麼一來，國平就不應該是`Police`而是`PoliceSpy`囉？我們應該刪掉`國平 Police object`，並新增一個`國平 PoliceSpy object`嗎？
+可是這麼一來，國平就不應該是`Police`而是`GangsterSpy`囉？我們應該刪掉`國平 Police object`，並新增一個`國平 GangsterSpy object`嗎？
 
-這樣的話，之前`國平 Police object`的相關記錄都會被刪除（例如：`CIBTeamTreat`），這樣合理嗎？又或者我們應該重新去確認所有跟`國平 Police object`有關的`object`將其替換為`國平 PoliceSpy object`？
+這樣的話，之前`國平 Police object`的相關記錄都會被刪除（例如：`CIBTeamTreat`），這樣合理嗎？又或者我們應該重新去確認所有跟`國平 Police object`有關的`object`將其替換為`國平 GangsterSpy object`？
 
 該怎麼做其實沒有標準的答案，不過一個比較常見的方法是使用`soft delete`。使用一個類似`is_active`的`property`來表達該`object`的存取狀態，而不真正將其從資料庫中刪除。畢竟在最後一幕之前，我們的確不知道國平是臥底，`國平 Police object`是一個合適的表達。
 
-最後我們`insert`國平的`PoliceSpy object`如下：
+最後我們`insert`國平的`GangsterSpy object`如下：
 ``` sql title="scenes/scene10/query.edgeql"
---8<-- "scenes/scene10/_internal/query.edgeql:insert_big_b_as_police_spy"
+--8<-- "scenes/scene10/_internal/query.edgeql:insert_big_b_as_gangster_spy"
 ```
 
 
@@ -129,38 +129,47 @@ tags:
 {'李心兒', 'May'}
 ```
 #### 斷捨離與`detached`
-假設永仁覺得自己有太多`lovers`，想利用`update`幫他斷捨離，但卻發現有時候`lovers`會被設為空`set`，他百思不得其解，讓我們一起來看看永仁遇到的情況。永仁一共嘗試了下列四種query，只有第一種會將`lovers`設為空`set`，其它三種都可以成功將`lovers`設定為心兒一人：
+假設永仁覺得自己有太多`lovers`，想利用`update`幫他斷捨離，但卻發現有時候`lovers`會被設為空`set`，他百思不得其解，讓我們一起來看看永仁遇到的情況。永仁一共嘗試了下列五種query，只有query1會將`lovers`設為空`set`，query2~query5都可以成功將`lovers`設定為心兒一人：
 
 === "query1"
     ``` sql title="scenes/scene10/query.edgeql"
+    #❌
     --8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_1_ng"
     ```
 
 === "query2"
     ``` sql title="scenes/scene10/query.edgeql"
+    #✅
     --8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_2_ok"
     ```
 
 === "query3"
     ``` sql title="scenes/scene10/query.edgeql"
+    #✅
     --8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_3_ok"
     ```
 
 === "query4"
     ``` sql title="scenes/scene10/query.edgeql"
+    #✅
     --8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_4_ok"
     ```
 
-原來問題出在query1中，我們在`update Character`的`set（關鍵字）`內再次使用了`select Character`。這個`Character`將會是外面`update Character filter .name="陳永仁"`語法中的`set`，而不是`Character`這個`object type`。當想要在各種top-level EdgeQL statements（`select`, `insert`, `update`及`delete`）內再次引用同一個`object type`時，需要使用[`detached`](https://www.edgedb.com/docs/stdlib/set#operator::detached)，例如：
+=== "query5"
+    ``` sql title="scenes/scene10/query.edgeql"
+    #✅
+    --8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_5_detached"
+    ```
 
-``` sql title="scenes/scene10/query.edgeql"
---8<-- "scenes/scene10/_internal/query.edgeql:update_chen4_detached"
-```
-如果要想避免使用`detached`的話，可以：
+原來問題出在query1中，我們在`update Character`的`set（關鍵字）`內再次使用了`select Character`。這個`Character`將會是外面`update Character filter .name="陳永仁"`語法中的`EdgeDBset`，而不是`Character`這個`object type`。當想要在各種top-level EdgeQL statements（`select`, `insert`, `update`及`delete`）內再次引用同一個`object type`時，需要使用[`detached`](https://www.edgedb.com/docs/stdlib/set#operator::detached)。
+
+
+這是個很常見的錯誤，以上提供了四種修訂方法：
 
 * 如query2，使用`alias`，如`chen` 。
 * 如query3，於`with`區塊內，暫時命名一個變數，如`ch`。
 * 如query4，於`update`時改使用其它`object type`，如`PoliceSpy`。
+* 如query5，使用`detached`。
 
 ### `insert`此場景的`Scene`
 ``` sql title="scenes/scene10/query.edgeql"

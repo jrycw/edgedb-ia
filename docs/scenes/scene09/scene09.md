@@ -1,6 +1,6 @@
 ---
 tags:
-  - access policies
+  - access policy
   - global
   - ext::pgcrypto
 ---
@@ -16,7 +16,7 @@ tags:
         ```
 
     === "end migration" 
-        ``` sql hl_lines="2 5-6 124-151 210-226 283 297-333 342 374-378" title="scenes/scene09/schema.esdl"
+        ``` sql hl_lines="2 5-6 124-151 214-230 287 301-337 346 378-382" title="scenes/scene09/schema.esdl"
         --8<-- "scenes/scene09/schema.esdl"
         ```
 
@@ -33,9 +33,7 @@ tags:
 ## 警隊資安升級計畫
 自從黃sir殉職之後，警隊高層了解在趕快找出韓琛臥底的同時，也需要保護好自己派出的臥底，於是決定全面重新檢查一遍資料庫的存取權限。
 
-經過一番資安演練，IT部門也發現平行時空的建明所發現的事情，即是當同時擁有`IsPolice`及`PoliceSpy`的讀取權限時，是可以由`IsPolice`的`id`來找出其在`PoliceSpy`中的`name`。
-
-由於現在能同時存取`IsPolice`及`PoliceSpy`的人數過多，高層決定做出以下變更：
+經過一番資安演練，IT部門也發現平行時空的建明所發現的漏洞，於是高層決定做出以下變更：
 
 * `PoliceSpy`新增兩個`access policy`：
     * 只有副處長級別以上（`DCP`）可以`insert`、`update`及`delete`。

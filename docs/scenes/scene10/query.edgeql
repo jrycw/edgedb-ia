@@ -12,7 +12,7 @@ set {
 };
 
 with b:= assert_single((select Police filter .name="林國平"))
-insert PoliceSpy {
+insert GangsterSpy {
       name:= b.name,
       nickname:= b.nickname,
       police_rank:= b.police_rank,
@@ -72,7 +72,7 @@ set {
 insert Character{
     name:= "May",
     eng_name:= "May",
-    lover:= chen,
+    lovers:= chen,
     actors:= (insert Actor{
         name:= "蕭亞軒",
         eng_name:= "Elva",

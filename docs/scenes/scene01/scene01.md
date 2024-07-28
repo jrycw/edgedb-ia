@@ -15,7 +15,7 @@ tags:
         ```
 
     === "end migration" 
-        ``` sql hl_lines="131-158" title="scenes/scene01/schema.esdl"
+        ``` sql hl_lines="135-162" title="scenes/scene01/schema.esdl"
         --8<-- "scenes/scene01/schema.esdl"
         ```
 ## 劇情提要
@@ -41,12 +41,17 @@ tags:
 ```
 
 ### `insert`韓琛及其演員曾志偉
-韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines` `property`中。
 
-此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`Actor object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
 ``` sql title="scenes/scene01/query.edgeql"
 --8<-- "scenes/scene01/_internal/query.edgeql:insert_hon"
 ```
+
+韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines` `property`中。
+
+此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`Actor object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
+
+另一種作法是觀察想選擇的`object`是否有`constraint exclusive`的`property`可以作為`filter`。如果有的話，即代表我們最多只會選擇到一個`object`，此時就不需要額外使用`assert_single()`了。這裡由於`Actor object`沒有`constraint exclusive`的`property`，所以無法使用這個作法。
+
 ### `insert`劉建明及其少年時期演員陳冠希
 語法與前面類似，留意`filter`時也可用`in {}`的寫法。
 ``` sql title="scenes/scene01/query.edgeql"
@@ -54,7 +59,7 @@ tags:
 ```
 
 ### 建立`alias`
-由於每次都要使用`(select ... filter ... .xxx=ooo)`的語法來選擇`object`頗為麻煩，針對常用到的`object`，可以直接在schema中定義`alias`，方便取用。我們這邊定義了一個`hon`（韓琛）、`lau`（劉建明）及`year_1992`（1992年）的`alias`。
+由於每次都要使用`(select ... filter ... .xxx=ooo)`的語法來選擇`object`頗為麻煩，針對常用到的`object`，可以直接在schema中建立`alias`，方便取用。我們這邊定義了一個`hon`（韓琛）、`lau`（劉建明）及`year_1992`（1992年）的`alias`。
 ``` sql title="scenes/scene01/schema.esdl"
 --8<-- "scenes/scene01/_internal/schema.esdl:alias_hon"
 --8<-- "scenes/scene01/_internal/schema.esdl:alias_lau"
@@ -72,9 +77,8 @@ tags:
     這種寫法比較快速，是我實際寫query會用的方法。但在定義schema時，我反而比較喜歡原先那種直接了當的寫法。
 
 
-
 ### 編寫測試`alias`的`function` 
-我們在`alias`前都加上了[`assert_exists()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_exists)及`assert_single()`，這樣可以確保每個`alias`**只會返回剛好一個`object`**。我自己會習慣寫一個名為`test_alias`的[`function`](https://www.edgedb.com/docs/datamodel/functions)來做測試：
+您可能有留意到，我們在`alias`前都加上了[`assert_exists()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_exists)及`assert_single()`，這樣可以確保每個`alias`**只會返回剛好一個`object`**。我自己會習慣寫一個名為`test_alias`的[`function`](https://www.edgedb.com/docs/datamodel/functions)來做測試：
 ``` sql title="scenes/scene01/schema.esdl"
 --8<-- "scenes/scene01/_internal/schema.esdl:test_alias"
 

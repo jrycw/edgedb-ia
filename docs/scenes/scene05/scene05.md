@@ -14,7 +14,7 @@ tags:
         ```
 
     === "end migration" 
-        ``` sql hl_lines="181-190 210 236-240" title="scenes/scene05/schema.esdl"
+        ``` sql hl_lines="185-194 214 240-244" title="scenes/scene05/schema.esdl"
         --8<-- "scenes/scene05/schema.esdl"
         ```
 
@@ -76,6 +76,8 @@ tags:
     初學的朋友可能會搞混這兩個方法。此時可以查看[`datetime`](https://www.edgedb.com/docs/stdlib/datetime)文件，通常沒有`()`的像是`datetime`或是`cal::local_datetime`，這代表是一種型態，可以於其後加上適當的`str`來`casting`。而像是有`to`開頭且有`()`的
     `to_datetime()`或是`cal::to_local_datetime()`，則代表`function`，需要參考其所提供的各種簽名來使用。EdgeDB可以針對同一個`function`名定義多次，接收不同的參數，像是`to_datetime()`就提供六種可以呼叫的簽名，這種特性稱為`function overloaded`。
 
+
+下面四種query皆會產生同樣的結果：
 ``` sql title="scenes/scene05/query.edgeql"
 --8<-- "scenes/scene05/_internal/query.edgeql:datetime_creation"
 ```

@@ -1,8 +1,8 @@
 ---
 tags:
   - delegated 
-  - backlinks
-  - link properties
+  - backlink
+  - link property
 ---
 
 # 07 - 互猜底牌
@@ -101,7 +101,7 @@ tags:
 --8<-- "scenes/scene07/_internal/query.edgeql:insert_iced_lemon_tea"
 ```
 
-### 再次熟悉`backlinks`
+### 再次熟悉`backlink`
 假如我們想知道建明喝了哪些飲料，可以這麼做：
 ``` sql title="scenes/scene07/query.edgeql"
 --8<-- "scenes/scene07/_internal/query.edgeql:select_Beverage_and_filter"
@@ -109,7 +109,7 @@ tags:
 ```
 {default::Beverage {name: '熱奶茶'}, default::Beverage {name: '綠茶'}}
 ```
-但是如果除了所喝的飲料，您又同時想顯示出建明的其它資訊，這時候可以使用`backlinks`來做：
+但是如果除了所喝的飲料，您又同時想顯示出建明的其它資訊，這時候可以使用`backlink`來做：
 ``` sql title="scenes/scene07/query.edgeql"
 --8<-- "scenes/scene07/_internal/query.edgeql:Beverage_backlinks1"
 ```
@@ -123,7 +123,7 @@ tags:
 }
 ```
 ??? tip "Deep fetching for backlinks"
-    別忘了在`backlinks`中也可以使用`shape`，像是這邊的`{name}`，來選取想要的`property`或`link`。
+    別忘了在`backlink`中也可以使用`shape`，像是這邊的`{name}`，來選取想要的`property`或`link`。
     
     也就是說您可以寫出像是下面這段有趣的query：
     ``` sql title="scenes/scene07/query.edgeql"
@@ -147,7 +147,7 @@ tags:
     * 建明的`nickname` `property`。
     * 建明所喝的飲料及喝飲料的地點。
 
-??? question "何時使用`backlinks`？"
+??? question "何時使用`backlink`？"
     當您想取得被`aaa`所`bbb`的`ccc`時，例如被建明（`aaa`）所喝掉（`bbb`）的飲料（`ccc`）時。此時對`aaa`使用`select`，`ccc`通常可以以`backlinks`的語法一起出現在`select`的`{}`內。
 
 ### 建立`TeamTreatNumber`及`CIBTeamTreat`
