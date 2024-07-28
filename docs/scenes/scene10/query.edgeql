@@ -1,4 +1,10 @@
-insert Police {name:= "test_DCP", police_rank:=PoliceRank.DCP};
+with one_dcp:= (select Police filter .police_rank=PoliceRank.DCP limit 1)
+select if exists one_dcp then {
+    (select one_dcp.id)
+} else {
+    (select (select (insert Police {name:= "test_DCP", police_rank:=PoliceRank.DCP})).id)
+};
+
 set global current_user_id:= (select Police filter .police_rank=PoliceRank.DCP limit 1).id;
 
 update chen 
@@ -67,6 +73,17 @@ update chen
 set {
     lover:= assert_single((select Character filter .name="李心兒")),
 };
+
+
+with one_dcp:= (select Police filter .police_rank=PoliceRank.DCP limit 1)
+select if exists one_dcp then {
+    (select one_dcp.id)
+} else {
+    (select (select (insert Police {name:= "test_DCP", police_rank:=PoliceRank.DCP})).id)
+};
+
+set global current_user_id:= (select Police filter .police_rank=PoliceRank.DCP limit 1).id;
+
 
 
 insert Character{

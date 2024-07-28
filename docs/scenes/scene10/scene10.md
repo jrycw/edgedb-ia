@@ -35,7 +35,7 @@ tags:
 ## EdgeQL query
 
 ### 設定`global` `current_user_id`
-由於本場景需要多次操作`PoliceSpy object`，我們可以`insert`一個`PoliceRank`為`DCP`的`Police object`，並將其`id`指定給`global current_user_id`。
+我們可以先搜尋看看branch內是否有`PoliceRank`為`DCP`的`Police object`，如果沒有的話，需要先`insert`一個。接著將此`Police object`的`id`指定給`global current_user_id`。
 ``` sql title="scenes/scene10/query.edgeql"
 --8<-- "scenes/scene10/_internal/query.edgeql:set_global"
 ```
@@ -113,6 +113,11 @@ tags:
 如果第一個選項我們選擇了`y`，EdgeDB會認為我們想先`drop`掉`lover`，然候加上一個`multi link`的`lovers`。如此一來`lovers`將會是空`set`，我們需要在於命令列執行完`edgedb migrate`後，手動將原來`lover`所指向的`object`加進來。
 
 **由這個例子可以知道，`migration`時不一定只能選擇`y`，應該視當下需求來決定。**
+
+由於此處進行了`migration`，所以需要再一次設定`global current_user_id`。
+``` sql title="scenes/scene10/query.edgeql"
+--8<-- "scenes/scene10/_internal/query.edgeql:set_global_after_migration"
+```
 
 最後我們`insert`May，並將May加入到`chen`的`lovers`。
 ``` sql title="scenes/scene10/query.edgeql"

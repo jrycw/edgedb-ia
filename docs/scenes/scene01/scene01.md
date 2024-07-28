@@ -41,14 +41,13 @@ tags:
 ```
 
 ### `insert`韓琛及其演員曾志偉
+韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines` `property`中。
+
+此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`Actor object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
 
 ``` sql title="scenes/scene01/query.edgeql"
 --8<-- "scenes/scene01/_internal/query.edgeql:insert_hon"
 ```
-
-韓琛於開頭就說出「一將功成萬骨枯」的經典句，我們將此句收錄在`classic_lines` `property`中。
-
-此外，雖然`actors`為`multi link`，可以包括多個演員。但是我們可以使用[`assert_single()`](https://www.edgedb.com/docs/stdlib/set#function::std::assert_single)來確保最多只會接收到一個曾志偉`Actor object`。這麼一來，如果資料庫內已經有兩個`Actor object`的`name`都叫曾志偉時，這個query就會報錯。
 
 另一種作法是觀察想選擇的`object`是否有`constraint exclusive`的`property`可以作為`filter`。如果有的話，即代表我們最多只會選擇到一個`object`，此時就不需要額外使用`assert_single()`了。這裡由於`Actor object`沒有`constraint exclusive`的`property`，所以無法使用這個作法。
 
