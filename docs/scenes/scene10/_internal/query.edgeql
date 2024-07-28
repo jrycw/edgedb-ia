@@ -93,7 +93,6 @@ set {
 };
 # --8<-- [end:update_chen2]
 
-
 # --8<-- [start:set_global_after_migration]
 with one_dcp:= (select Police filter .police_rank=PoliceRank.DCP limit 1)
 select if exists one_dcp then {
@@ -104,8 +103,6 @@ select if exists one_dcp then {
 
 set global current_user_id:= (select Police filter .police_rank=PoliceRank.DCP limit 1).id;
 # --8<-- [end:set_global_after_migration]
-
-
 
 # --8<-- [start:insert_may]
 insert Character{
