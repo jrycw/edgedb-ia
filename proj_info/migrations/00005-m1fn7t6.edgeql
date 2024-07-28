@@ -1,5 +1,5 @@
-CREATE MIGRATION m1fjui2bohofvhbeyii2pas6fzupyb7a5odygxpqaeewnxrkbtqrhq
-    ONTO m136gnzuezxpgyv7ju4pgostosaq3uql6nnqlyzipkvnjmcdicalxq
+CREATE MIGRATION m1fn7t6zu27x3lrukpvwfqgliidyq6ouxtqmwqa77mjjuqu37npe6q
+    ONTO m1dccfqhsgaadnglq2ckmbu5a2e7yzpxqb2cuf2airm75lj7unb27a
 {
   CREATE ALIAS default::police_station := (
       std::assert_exists(std::assert_single((SELECT

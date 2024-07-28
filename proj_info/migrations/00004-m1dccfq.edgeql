@@ -1,5 +1,5 @@
-CREATE MIGRATION m136gnzuezxpgyv7ju4pgostosaq3uql6nnqlyzipkvnjmcdicalxq
-    ONTO m16xboo673icbje6taadxtud76v5hfutc3hjzxexhy42lszjhogpda
+CREATE MIGRATION m1dccfqhsgaadnglq2ckmbu5a2e7yzpxqb2cuf2airm75lj7unb27a
+    ONTO m1iolrlkdl63zmbic6vfn3jcbkcygyvzoj6fcg4jo7qv7nfctnjrnq
 {
   CREATE TYPE default::ChenLauContact EXTENDING default::Event {
       ALTER LINK who {

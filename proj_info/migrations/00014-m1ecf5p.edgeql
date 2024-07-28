@@ -1,5 +1,5 @@
-CREATE MIGRATION m1hgbgfi27lwf3vg6pilotkr4i6vxhuqns3zzvhlf7y5czuj53giva
-    ONTO m177hjcna3qg77ddbvyxmmbrye3wpwcknz7i6qa4n6ivbq5jejxwwq
+CREATE MIGRATION m1ecf5pn6k7l4kwhb5w3eg3ucwppgfykndhsxaxkputy3kig7itwva
+    ONTO m1yd24uzikzfjk3lbwpgeyzo6kjgourvj5wu7psvbog67u3n4wjmpq
 {
   ALTER TYPE default::Character {
       ALTER LINK lover {

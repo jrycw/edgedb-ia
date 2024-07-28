@@ -1,5 +1,5 @@
-CREATE MIGRATION m1cyfd35g55tg36lvobgy2hmxkrpmvvk432vskn5exxmslw3bxyv2a
-    ONTO m1ppscybzqoxvx32xwgtfcxz5n4k7nprbzhrkw6n2nn7lleky2ngma
+CREATE MIGRATION m1lp75tn62kfa4dbkkkv2u4pr3t2jjeyrix7cntwllnjid2mmu23qq
+    ONTO m1ngyznn6gdb6gjlvzcgw7dvdrmz7fbbfxzllxc3765gviarr4dvvq
 {
   CREATE TYPE default::Envelope {
       CREATE ACCESS POLICY allow_select_insert_delete

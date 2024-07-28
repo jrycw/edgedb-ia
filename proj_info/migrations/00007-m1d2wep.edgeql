@@ -1,5 +1,5 @@
-CREATE MIGRATION m1ngvzy5p3nncwvb6a5s565yxpkpme45yca2wkfxa764ha3nq5amja
-    ONTO m1uv5jvgusazq2gzf3n2nuiprqremmgfkiphxwydvhqttk7dqida7a
+CREATE MIGRATION m1d2wepwiyhx6ddv7rey265hmvm73jorq6as6ddtu337jwjfdrl4sq
+    ONTO m1aied2jdcfmhoyemqucenfzfugenpfkrltizeqmppzossbnlgdiea
 {
   CREATE FUNCTION default::is_hi_fi_store_open(dow: default::DayOfWeek, visit_hour: std::int64) ->  std::bool USING (WITH
       open_hours := 

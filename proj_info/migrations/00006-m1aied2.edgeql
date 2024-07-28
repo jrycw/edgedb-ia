@@ -1,5 +1,5 @@
-CREATE MIGRATION m1uv5jvgusazq2gzf3n2nuiprqremmgfkiphxwydvhqttk7dqida7a
-    ONTO m1fjui2bohofvhbeyii2pas6fzupyb7a5odygxpqaeewnxrkbtqrhq
+CREATE MIGRATION m1aied2jdcfmhoyemqucenfzfugenpfkrltizeqmppzossbnlgdiea
+    ONTO m1fn7t6zu27x3lrukpvwfqgliidyq6ouxtqmwqa77mjjuqu37npe6q
 {
   CREATE ABSTRACT TYPE default::Archive;
   CREATE TYPE default::CriminalRecord EXTENDING default::Archive {

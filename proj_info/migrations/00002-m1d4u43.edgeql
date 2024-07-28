@@ -1,5 +1,5 @@
-CREATE MIGRATION m16j44velzxt3wk6olqyjdj6yvptu4k6jrbeqlultuzdjdtx7fd7jq
-    ONTO m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
+CREATE MIGRATION m1d4u43vqej5cm2hj3atx2rwj64geqmcxwwqahnwx53d6yz5jedfaa
+    ONTO m1icz4hxkdlltw2fwwiief5tjgomwgr2ihpmdeny7owr235wmpqecq
 {
   CREATE ALIAS default::hon := (
       std::assert_exists(std::assert_single((SELECT

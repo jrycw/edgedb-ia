@@ -1,5 +1,5 @@
-CREATE MIGRATION m167aa2yvy7i3v65yyzo4clj6ik3ugilphxirh2o42wnq7g2i7xnta
-    ONTO m1ngvzy5p3nncwvb6a5s565yxpkpme45yca2wkfxa764ha3nq5amja
+CREATE MIGRATION m1en23ahl7rdq4pcuaoejswszaybhzlgxc3qwpcks56ba7rmc5q6wq
+    ONTO m1d2wepwiyhx6ddv7rey265hmvm73jorq6as6ddtu337jwjfdrl4sq
 {
   CREATE ALIAS default::year_2002 := (
       std::assert_exists(std::assert_single((SELECT

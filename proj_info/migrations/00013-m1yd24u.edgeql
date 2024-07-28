@@ -1,5 +1,5 @@
-CREATE MIGRATION m177hjcna3qg77ddbvyxmmbrye3wpwcknz7i6qa4n6ivbq5jejxwwq
-    ONTO m1phcwjq6nmblgjtyh4dov4gm2fspye4oub7ybyjv3dryr56vwnfjq
+CREATE MIGRATION m1yd24uzikzfjk3lbwpgeyzo6kjgourvj5wu7psvbog67u3n4wjmpq
+    ONTO m1f62bczhdawkow3bphndbuie3gdl2htatf5mxatxw54hqjoy5laaa
 {
   CREATE EXTENSION pgcrypto VERSION '1.3';
   CREATE ALIAS default::morse_code_of_undercover := (

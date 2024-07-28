@@ -1,4 +1,4 @@
-CREATE MIGRATION m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
+CREATE MIGRATION m1icz4hxkdlltw2fwwiief5tjgomwgr2ihpmdeny7owr235wmpqecq
     ONTO initial
 {
   CREATE ABSTRACT TYPE default::Person {
@@ -33,13 +33,7 @@ CREATE MIGRATION m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
       CREATE PROPERTY remarks: std::str;
       CREATE PROPERTY title: std::str;
   };
-  CREATE SCALAR TYPE default::GangsterRank EXTENDING enum<Nobody, Leader, Boss>;
   CREATE SCALAR TYPE default::PoliceRank EXTENDING enum<Protected, Cadet, PC, SPC, SGT, SSGT, PI, IP, SIP, CIP, SP, SSP, CSP, ACP, SACP, DCP, CP>;
-  CREATE ABSTRACT TYPE default::IsGangster {
-      CREATE PROPERTY gangster_rank: default::GangsterRank {
-          SET default := (default::GangsterRank.Nobody);
-      };
-  };
   CREATE ABSTRACT TYPE default::IsPolice {
       CREATE PROPERTY dept: std::str;
       CREATE PROPERTY police_rank: default::PoliceRank {
@@ -47,10 +41,23 @@ CREATE MIGRATION m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
       };
       CREATE PROPERTY is_officer := ((.police_rank >= default::PoliceRank.PI));
   };
-  CREATE ABSTRACT TYPE default::IsSpy EXTENDING default::IsPolice, default::IsGangster;
-  CREATE TYPE default::PoliceSpy EXTENDING default::Character, default::IsSpy;
   CREATE TYPE default::Police EXTENDING default::Character, default::IsPolice;
+  CREATE SCALAR TYPE default::GangsterRank EXTENDING enum<Nobody, Leader, Boss>;
+  CREATE ABSTRACT TYPE default::IsGangster {
+      CREATE PROPERTY gangster_rank: default::GangsterRank {
+          SET default := (default::GangsterRank.Nobody);
+      };
+  };
+  CREATE ABSTRACT TYPE default::IsSpy EXTENDING default::IsPolice, default::IsGangster;
+  CREATE TYPE default::GangsterSpy EXTENDING default::Character, default::IsSpy {
+      ALTER PROPERTY police_rank {
+          SET default := (default::PoliceRank.Protected);
+          SET OWNED;
+          SET TYPE default::PoliceRank;
+      };
+  };
   CREATE TYPE default::Gangster EXTENDING default::Character, default::IsGangster;
+  CREATE TYPE default::PoliceSpy EXTENDING default::Character, default::IsSpy;
   CREATE TYPE default::GangsterBoss EXTENDING default::Gangster {
       ALTER PROPERTY gangster_rank {
           SET default := (default::GangsterRank.Boss);
@@ -59,10 +66,6 @@ CREATE MIGRATION m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
           CREATE CONSTRAINT std::expression ON ((__subject__ = default::GangsterRank.Boss));
       };
   };
-  ALTER TYPE default::IsGangster {
-      CREATE LINK gangster_boss: default::GangsterBoss;
-  };
-  CREATE TYPE default::GangsterSpy EXTENDING default::Character, default::IsSpy;
   CREATE SCALAR TYPE default::DayOfWeek EXTENDING enum<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>;
   CREATE SCALAR TYPE default::FuzzyDay EXTENDING std::int64 {
       CREATE CONSTRAINT std::expression ON (((__subject__ >= 1) AND (__subject__ <= 31)));
@@ -136,6 +139,9 @@ CREATE MIGRATION m1ol5jxvc6l2at2kztb5zask5icf6ckasntcbidrrfsx677askknoq
   };
   ALTER TYPE default::Event {
       CREATE MULTI LINK `when`: default::FuzzyTime;
+  };
+  ALTER TYPE default::IsGangster {
+      CREATE LINK gangster_boss: default::GangsterBoss;
   };
   ALTER TYPE default::GangsterBoss {
       CREATE CONSTRAINT std::expression ON ((__subject__ != .gangster_boss)) {

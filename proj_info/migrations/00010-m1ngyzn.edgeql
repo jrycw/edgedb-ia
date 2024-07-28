@@ -1,5 +1,5 @@
-CREATE MIGRATION m1ppscybzqoxvx32xwgtfcxz5n4k7nprbzhrkw6n2nn7lleky2ngma
-    ONTO m17ioxejmqetxu4ex54m2gt66tjxtyicsvy67eb3p5nhn3hjrz4zhq
+CREATE MIGRATION m1ngyznn6gdb6gjlvzcgw7dvdrmz7fbbfxzllxc3765gviarr4dvvq
+    ONTO m1dem5eboiim52mq67hlkcoznwqmusag66vp6yfh7ynuggbp3y5cfq
 {
   CREATE SCALAR TYPE default::TeamTreatNumber EXTENDING std::sequence;
   CREATE TYPE default::CIBTeamTreat {
