@@ -81,7 +81,11 @@ module default {
     # --8<-- [end:object_type_PoliceSpy]  
 
     # --8<-- [start:object_type_GangsterSpy]  
-    type GangsterSpy extending Character, IsSpy;
+    type GangsterSpy extending Character, IsSpy {
+        overloaded police_rank: PoliceRank {
+            default:= PoliceRank.Protected;
+        }
+    };
     # --8<-- [end:object_type_GangsterSpy]  
 
 }

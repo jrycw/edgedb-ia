@@ -2,7 +2,6 @@
 insert PoliceSpy {
       name:="陳永仁",
       nickname:= "仁哥",
-      police_rank:= PoliceRank.Protected,
       gangster_boss:= hon,
       actors := (insert Actor {
                   name:= "余文樂",
@@ -48,6 +47,6 @@ insert Scene {
       remarks:= "1.假設黃Sir於1992年官階為`SIP`。",     
       who:= {wong, chen, lau},
       `when`:= year_1992,
-      where:= assert_single((select Landmark filter .name="警校")),    
+      where:= (select Landmark filter .name="警校"),    
 };
 # --8<-- [end:insert_scene]
