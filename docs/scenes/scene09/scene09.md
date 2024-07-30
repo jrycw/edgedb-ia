@@ -198,6 +198,10 @@ reset global current_user_id;
 接著進行`PoliceSpy`各項操作測試：
 
 * `insert`會得到`AccessPolicyError`。
+!!! failure "報錯訊息"
+    ```
+    edgedb error: AccessPolicyError: access policy violation on insert of default::PoliceSpy (PoliceRank required: PoliceRank.DCP)
+    ```
 * `select`可以正常執行。
 * `update`及`delete`會得到空`set`。
 

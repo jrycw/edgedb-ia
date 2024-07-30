@@ -9,8 +9,6 @@ select validate_password("27149"); # {false}
 
 set global current_user_id:= (select Police filter .police_rank=PoliceRank.SP limit 1).id;
 
-insert PoliceSpy {name:= "test_police_spy_by_SP"}; # AccessPolicyError
-
 select PoliceSpy;
 
 update PoliceSpy
