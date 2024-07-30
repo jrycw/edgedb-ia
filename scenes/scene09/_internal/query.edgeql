@@ -17,8 +17,6 @@ set global current_user_id:= (select Police filter .police_rank=PoliceRank.SP li
 # --8<-- [end:test_police_rank_SP_sec1]
 
 # --8<-- [start:test_police_rank_SP_sec2]
-insert PoliceSpy {name:= "test_police_spy_by_SP"}; # AccessPolicyError
-
 select PoliceSpy;
 
 update PoliceSpy
