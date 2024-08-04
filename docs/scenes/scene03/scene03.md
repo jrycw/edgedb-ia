@@ -114,7 +114,7 @@ tags:
 ### `insert` `CriminalRecord`
 我們選擇使用[`tuple`](https://www.edgedb.com/docs/stdlib/tuple#type::std::tuple)搭配[`for-loop`](https://www.edgedb.com/docs/edgeql/for#for)來`insert`片中出現的兩次犯罪記錄，這個模式在EdgeDB中稱為[bulk inserts](https://www.edgedb.com/docs/edgeql/for#bulk-inserts)。
 
-* 於`with`區塊中，建立一個`records` `set`，裡面有兩個`tuple`代表兩次犯罪記錄。`tuple`的第一個元素為`ref_no`，而第二個元素為`code`。
+* 於`with`區塊中，建立一個`records` `EdgeDBset`，裡面有兩個`tuple`代表兩次犯罪記錄。`tuple`的第一個元素為`ref_no`，而第二個元素為`code`。
 * 接著使用`for-loop` + `union` + (`insert` `CriminalRecord`)的語法，來`insert`兩次犯罪記錄。我們可以使用`.0`來取得`tuple`的第一個元素、`.1`來取得`tuple`的第二個元素，依此類推。
 
 ``` sql title="scenes/scene03/query.edgeql"
@@ -140,8 +140,10 @@ tags:
         record_len:= len(records),
     for i in range_unpack(range(0, record_len))
     union (insert CriminalRecord {
-                    ref_no:= array_get(records, i).0, 
-                    code:= array_get(records, i).1, 
+                    ref_no:= array_get(records, i).0,
+                    code:= array_get(records, i).1,
+                    ref_no:= record.ref_no,
+                    code:= record.code,
                     involved:= chen,
     });
     ```    
