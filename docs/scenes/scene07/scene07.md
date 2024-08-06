@@ -168,7 +168,7 @@ tags:
 `team_treat_number`為一`property`，其使用`TeamTreatNumber`為記數器，和`Scene`的`scene_number`一樣都是自動產生不重覆的編號。
 
 #### `colleagues`
-`colleagues`是一個`Police`的`multi link`，其預設選擇CIB部門的所有警察，這符合我們的需求，因為長官不須參加抽獎（記得建明是`PoliceSpy`嗎？）。接著我們加上`readonly`為`true`的限制，防止大家抽完獎之後耍賴偷改。
+`colleagues`是一個`Police`的`multi link`，其預設選擇CIB部門的所有警察，這符合我們的需求，因為長官不須參加抽獎（記得建明是`GangsterSpy`嗎？）。接著我們加上`readonly`為`true`的限制，防止大家抽完獎之後耍賴偷改。
 
 最後我們新增一個`int64`的`point`，這是一個[`link property`](https://www.edgedb.com/docs/datamodel/links#link-properties)，顧名思義其為一個`colleagues` `link`的`property`。這個`link property`並不能由`Police`來存取（雖然它現在正在`Police`的`{}`中），它只能夠在我們針對`CIBTeamTreat`query時存取。我們使用內建的[`math::ceil()`](https://www.edgedb.com/docs/stdlib/math#function::math::ceil)及[`random()`](https://www.edgedb.com/docs/stdlib/numbers#function::std::random)來給予CIB部門所有警察一個1~10的預設值，模擬抽獎過程（每個警察都會抽一次，且不會全部都是同一個數字）。
 
